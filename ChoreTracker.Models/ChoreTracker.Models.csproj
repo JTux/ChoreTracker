@@ -45,6 +45,7 @@
     <Compile Include="AdminModels\AdminUserCreate.cs" />
     <Compile Include="AdminModels\AdminUserListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleModels\RoleAssign.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

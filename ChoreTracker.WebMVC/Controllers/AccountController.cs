@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ChoreTracker.WebMVC.Models;
 using ChoreTracker.WebMVC.Data;
+using ChoreTracker.Models.RoleModels;
+using ChoreTracker.Services;
 
 namespace ChoreTracker.WebMVC.Controllers
 {
@@ -171,6 +173,22 @@ namespace ChoreTracker.WebMVC.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public ActionResult SelectRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SelectRole(RoleAssign model)
+        {
+            var service = new AccountService(Guid.Parse(User.Identity.GetUserId()));
+
+            service.AssignRole(model);
+
+            return RedirectToAction("Index", "Home");
         }
 
         //

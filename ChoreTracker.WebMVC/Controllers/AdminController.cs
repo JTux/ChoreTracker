@@ -97,6 +97,11 @@ namespace ChoreTracker.WebMVC.Controllers
         [HttpPost]
         public ActionResult RoleCreate(IdentityRole role)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(role);
+            }
+
             var service = CreateAdminService();
 
             if (!service.IsAdminUser())
