@@ -26,12 +26,32 @@ namespace ChoreTracker.Services
             }
         }
 
+        public void CreateNewAdmin(ApplicationUser user)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                userManager.Create(user, $"Test1!");
+                var guy = ctx.Users.FirstOrDefault(u => u.Email == user.Email);
+                userManager.AddToRole(guy.Id, "Admin");
+            }
+        }
+
         public IEnumerable<IdentityRole> GetRolesList()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var rolesList = ctx.Roles.ToList();
                 return rolesList.ToArray();
+            }
+        }
+
+        public void CreateNewRole(IdentityRole role)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Roles.Add(role);
+                ctx.SaveChanges();
             }
         }
 

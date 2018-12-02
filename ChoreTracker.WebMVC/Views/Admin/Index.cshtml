@@ -6,7 +6,7 @@
 
 <h1>Welcome @User.Identity.Name</h1>
 
-<h2>Admin</h2>
+<p>What would you like to do?</p>
 
-<p>Here is an admin page. What would you like to do?</p>
-<p>Here be options</p>
+@Html.ActionLink("View Users", "UserIndex") | 
+@Html.ActionLink("View Roles", "RoleIndex")

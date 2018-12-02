@@ -1,4 +1,5 @@
 ﻿using ChoreTracker.Services;
+using ChoreTracker.WebMVC.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -36,6 +37,35 @@ namespace ChoreTracker.WebMVC.Controllers
             return View(users);
         }
 
+        //-- Allows Admins to create another Admin Account
+        public ActionResult AdminCreate()
+        {
+            var service = CreateAdminService();
+
+            if (!service.IsAdminUser())
+                return RedirectToAction("Index", "Home");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdminCreate(ApplicationUser user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var service = CreateAdminService();
+
+            if (!service.IsAdminUser())
+                return RedirectToAction("Index", "Home");
+
+            service.CreateNewAdmin(user);
+
+            return RedirectToAction("Index");
+        }
+
         //-- Will control view for viewing roles through an admin portal
         public ActionResult RoleIndex()
         {
@@ -69,6 +99,8 @@ namespace ChoreTracker.WebMVC.Controllers
 
             if (!service.IsAdminUser())
                 return RedirectToAction("Index", "Home");
+
+            service.CreateNewRole(role);
 
             return RedirectToAction("Index");
         }

@@ -57,7 +57,7 @@ namespace ChoreTracker.WebMVC.Data
     {
         public IdentityUserRoleConfiguration()
         {
-            HasKey(iur => iur.RoleId);
+            HasKey(iur => iur.UserId);
         }
     }
 }
