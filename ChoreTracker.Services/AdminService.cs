@@ -1,4 +1,5 @@
 ﻿using ChoreTracker.Contracts;
+using ChoreTracker.Models.AdminModels;
 using ChoreTracker.WebMVC.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -26,14 +27,26 @@ namespace ChoreTracker.Services
             }
         }
 
-        public void CreateNewAdmin(ApplicationUser user)
+        public bool CreateNewAdmin(AdminUserCreate user)
         {
+            var entity = new ApplicationUser
+            {
+                UserName = user.UserName,
+                Email = user.Email
+            };
+
             using (var ctx = new ApplicationDbContext())
             {
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-                userManager.Create(user, $"Test1!");
-                var guy = ctx.Users.FirstOrDefault(u => u.Email == user.Email);
-                userManager.AddToRole(guy.Id, "Admin");
+                if (ctx.Users.Where(u => u.Email == user.Email || u.UserName == user.UserName).Count() == 0)
+                {
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                    userManager.Create(entity, user.Password);
+                    var guy = ctx.Users.FirstOrDefault(u => u.Email == user.Email);
+                    userManager.AddToRole(guy.Id, "Admin");
+                    return true;
+                }
+                else
+                    return false;
             }
         }
 

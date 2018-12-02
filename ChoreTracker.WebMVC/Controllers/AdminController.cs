@@ -1,4 +1,5 @@
-﻿using ChoreTracker.Services;
+﻿using ChoreTracker.Models.AdminModels;
+using ChoreTracker.Services;
 using ChoreTracker.WebMVC.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -49,7 +50,7 @@ namespace ChoreTracker.WebMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdminCreate(ApplicationUser user)
+        public ActionResult AdminCreate(AdminUserCreate user)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +62,8 @@ namespace ChoreTracker.WebMVC.Controllers
             if (!service.IsAdminUser())
                 return RedirectToAction("Index", "Home");
 
-            service.CreateNewAdmin(user);
+            if (!service.CreateNewAdmin(user))
+                return RedirectToAction("Error");
 
             return RedirectToAction("Index");
         }
