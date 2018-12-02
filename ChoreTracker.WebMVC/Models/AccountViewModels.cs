@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ChoreTracker.Models.RoleModels;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChoreTracker.WebMVC.Models
@@ -82,6 +83,11 @@ namespace ChoreTracker.WebMVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "User Role")]
+        [Range(1, int.MaxValue, ErrorMessage = "Select a Role")]
+        public Role UserRole { get; set; }
     }
 
     public class ResetPasswordViewModel

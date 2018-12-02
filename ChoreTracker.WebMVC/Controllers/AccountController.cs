@@ -12,6 +12,7 @@ using ChoreTracker.WebMVC.Models;
 using ChoreTracker.WebMVC.Data;
 using ChoreTracker.Models.RoleModels;
 using ChoreTracker.Services;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ChoreTracker.WebMVC.Controllers
 {
@@ -156,6 +157,14 @@ namespace ChoreTracker.WebMVC.Controllers
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                    var newUser = ctx.Users.FirstOrDefault(u => u.Email == model.Email && u.UserName == model.UserName);
+                    userManager.AddToRole(newUser.Id, model.UserRole.ToString());
+                }
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -173,22 +182,6 @@ namespace ChoreTracker.WebMVC.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
-
-        public ActionResult SelectRole()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SelectRole(RoleAssign model)
-        {
-            var service = new AccountService(Guid.Parse(User.Identity.GetUserId()));
-
-            service.AssignRole(model);
-
-            return RedirectToAction("Index", "Home");
         }
 
         //
