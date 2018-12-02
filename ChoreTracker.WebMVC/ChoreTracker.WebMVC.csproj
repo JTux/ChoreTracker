@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -274,6 +275,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Admin\Error.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\RoleCreate.cshtml" />
+    <Content Include="Views\Admin\RoleIndex.cshtml" />
+    <Content Include="Views\Admin\UserIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,6 +299,14 @@
     <ProjectReference Include="..\ChoreTracker.Data\ChoreTracker.Data.csproj">
       <Project>{F8B7703E-851E-4B32-A205-7315004C2DBD}</Project>
       <Name>ChoreTracker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChoreTracker.Models\ChoreTracker.Models.csproj">
+      <Project>{f8634e90-7f83-404f-8f14-3674dfe2e507}</Project>
+      <Name>ChoreTracker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChoreTracker.Services\ChoreTracker.Services.csproj">
+      <Project>{E05344D2-E00B-475E-8CC8-DD8E53BC464E}</Project>
+      <Name>ChoreTracker.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
