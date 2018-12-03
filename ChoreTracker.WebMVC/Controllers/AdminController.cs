@@ -63,7 +63,7 @@ namespace ChoreTracker.WebMVC.Controllers
                 return RedirectToAction("Index", "Home");
 
             if (!service.CreateNewAdmin(user))
-                return RedirectToAction("Error");
+                return View(user);
 
             return RedirectToAction("Index");
         }
