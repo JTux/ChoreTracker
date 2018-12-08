@@ -26,6 +26,14 @@
                     {
                         <li class="nav-item">@Html.ActionLink("Admin Portal", "Index", "Admin", null, new { @class = "nav-link" })</li>
                     }
+                    @if (User.IsInRole("Admin") || User.IsInRole("GroupOwner"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("Group Owner Portal", "Index", "Owner", null, new { @class = "nav-link" })</li>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("GroupMember"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("Group Member Portal", "Index", "Member", null, new { @class = "nav-link" })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
