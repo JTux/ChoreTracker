@@ -8,15 +8,28 @@
 
 <table class="table">
     <tr>
+        <th>Group Members</th>
+        <th>Reward Points</th>
+    </tr>
+    @foreach (var gm in ViewBag.GroupMembers)
+    {
+        <tr>
+            <td>@gm.UserName</td>
+            <td>@gm.RewardPoints</td>
+        </tr>
+    }
+</table>
+<table class="table">
+    <tr>
         <th>
             @Html.DisplayNameFor(model => model.GroupInviteKey)
         </th>
+        <th></th>
     </tr>
-
     <tr>
         <td>
             @Html.DisplayFor(model => model.GroupInviteKey)
         </td>
+        <td></td>
     </tr>
-
 </table>

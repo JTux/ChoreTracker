@@ -27,6 +27,9 @@ namespace ChoreTracker.WebMVC.Controllers
             }
 
             var model = svc.GetGroupInfo();
+
+            ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
+
             return View(model);
         }
 

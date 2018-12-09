@@ -9,6 +9,9 @@ namespace ChoreTracker.Models.GroupModels
 {
     public class GroupDetail
     {
+        [Display(Name = "Group Id")]
+        public int GroupId { get; set; }
+
         [Display(Name = "Group Name")]
         public string GroupName { get; set; }
 

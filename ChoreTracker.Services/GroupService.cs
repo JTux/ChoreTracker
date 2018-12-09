@@ -22,15 +22,45 @@ namespace ChoreTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var group = ctx.Groups.FirstOrDefault(g => g.OwnerId == _userId);
+                Group group;
+                var groupMember = ctx.GroupMembers.FirstOrDefault(g => g.MemberId == _userId);
 
-                if (group == null) return new GroupDetail();
+                if (groupMember == null)
+                    group = ctx.Groups.FirstOrDefault(g => g.OwnerId == _userId);
+                else
+                    group = ctx.Groups.FirstOrDefault(g => g.GroupId == groupMember.GroupId);
 
-                return new GroupDetail
+                if (group != null)
                 {
-                    GroupName = group.GroupName,
-                    GroupInviteKey = group.GroupInviteKey
-                };
+                    return new GroupDetail
+                    {
+                        GroupId = group.GroupId,
+                        GroupName = group.GroupName,
+                        GroupInviteKey = group.GroupInviteKey
+                    };
+                }
+
+                return new GroupDetail();
+            }
+        }
+
+        public List<GroupMemberDetail> GetGroupMembers(int groupId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var members = new List<GroupMemberDetail>();
+                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId);
+
+                foreach (var gm in groupMembers)
+                {
+                    var member = ctx.Users.Single(u => u.Id == gm.MemberId.ToString());
+                    members.Add(new GroupMemberDetail
+                    {
+                        UserName = member.UserName
+                    });
+                }
+
+                return members;
             }
         }
 
