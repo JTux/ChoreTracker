@@ -23,5 +23,7 @@ namespace ChoreTracker.Data
 
         [Required]
         public string Description { get; set; }
+        
+        public virtual Group Group { get; set; }
     }
 }

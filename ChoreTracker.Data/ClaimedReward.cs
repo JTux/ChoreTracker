@@ -17,5 +17,7 @@ namespace ChoreTracker.Data
 
         [Required]
         public Guid OwnerId { get; set; }
+
+        public virtual Reward Reward { get; set; }
     }
 }
