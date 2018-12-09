@@ -1,0 +1,22 @@
+﻿@model ChoreTracker.Models.GroupModels.GroupDetail
+
+@{
+    ViewBag.Title = @Html.DisplayFor(model => model.GroupName);
+}
+
+<h2>@Html.DisplayFor(model => model.GroupName)</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupInviteKey)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.GroupInviteKey)
+        </td>
+    </tr>
+
+</table>

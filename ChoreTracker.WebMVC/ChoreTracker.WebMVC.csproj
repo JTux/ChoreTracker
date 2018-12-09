@@ -286,10 +286,12 @@
     <Content Include="Views\Admin\AdminCreate.cshtml" />
     <Content Include="Views\Owner\Index.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
+    <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Group\JoinGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Group\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
