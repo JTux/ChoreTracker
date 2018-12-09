@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChoreTracker.Data;
 using ChoreTracker.Models.GroupModels;
+using ChoreTracker.Models.RewardModels;
 using ChoreTracker.WebMVC.Data;
 
 namespace ChoreTracker.Services
@@ -32,11 +33,13 @@ namespace ChoreTracker.Services
 
                 if (group != null)
                 {
+                    var owner = ctx.Users.FirstOrDefault(u => u.Id == group.OwnerId.ToString());
                     return new GroupDetail
                     {
                         GroupId = group.GroupId,
                         GroupName = group.GroupName,
-                        GroupInviteKey = group.GroupInviteKey
+                        GroupInviteKey = group.GroupInviteKey,
+                        GroupOwner = owner.UserName
                     };
                 }
 
@@ -113,10 +116,14 @@ namespace ChoreTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var group = ctx.Groups.FirstOrDefault(g => g.GroupInviteKey == model.GroupInviteKey);
+                if (group == null)
+                    return false;
+
                 var groupMember = new GroupMember
                 {
                     MemberId = _userId,
-                    GroupId = ctx.Groups.Single(g => g.GroupInviteKey == model.GroupInviteKey).GroupId
+                    GroupId = group.GroupId
                 };
 
                 ctx.GroupMembers.Add(groupMember);

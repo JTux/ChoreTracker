@@ -48,6 +48,8 @@
     <Compile Include="GroupModels\GroupMemberDetail.cs" />
     <Compile Include="GroupModels\JoinGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RewardModels\RewardCreate.cs" />
+    <Compile Include="RewardModels\RewardListItem.cs" />
     <Compile Include="RoleModels\RoleAssign.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

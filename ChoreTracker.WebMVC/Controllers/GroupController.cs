@@ -77,6 +77,7 @@ namespace ChoreTracker.WebMVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult JoinGroup(JoinGroup model)
         {
             var svc = GetGroupService();

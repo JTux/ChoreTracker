@@ -178,9 +178,10 @@ namespace ChoreTracker.WebMVC.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     if (model.UserRole.ToString() == "GroupOwner")
-                    {
                         return RedirectToAction("Create", "Group");
-                    }
+
+                    if (model.UserRole.ToString() == "GroupMember")
+                        return RedirectToAction("JoinGroup", "Group");
 
                     return RedirectToAction("Index", "Home");
                 }
