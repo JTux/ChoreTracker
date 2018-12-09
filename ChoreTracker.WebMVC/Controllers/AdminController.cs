@@ -26,8 +26,9 @@ namespace ChoreTracker.WebMVC.Controllers
         }
 
         //-- Will control view for viewing all users through an admin portal
-        public ActionResult UserIndex()
+        public ActionResult UserIndex(string[] dynamicField)
         {
+            ViewBag.Data = string.Join(",", dynamicField ?? new string[] { });
             var service = CreateAdminService();
 
             if (!service.IsAdminUser())
@@ -63,9 +64,22 @@ namespace ChoreTracker.WebMVC.Controllers
                 return RedirectToAction("Index", "Home");
 
             if (!service.CreateNewAdmin(user))
-                return RedirectToAction("Error");
+                return View(user);
 
             return RedirectToAction("Index");
+        }
+
+        //-- Will be used to edit user eventually
+        public ActionResult EditUser()
+        {
+            var service = CreateAdminService();
+
+            if (!service.IsAdminUser())
+                return RedirectToAction("Index", "Home");
+
+            var users = service.GetUserList();
+
+            return View(users);
         }
 
         //-- Will control view for viewing roles through an admin portal
@@ -112,6 +126,7 @@ namespace ChoreTracker.WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        //-- Controls view for Generic Error for now
         public ActionResult Error()
         {
             return View();

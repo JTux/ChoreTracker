@@ -29,6 +29,9 @@ namespace ChoreTracker.Services
 
         public bool CreateNewAdmin(AdminUserCreate user)
         {
+            if (user.Password != user.ConfirmPassword)
+                return false;
+
             var entity = new ApplicationUser
             {
                 UserName = user.UserName,
@@ -41,8 +44,8 @@ namespace ChoreTracker.Services
                 {
                     var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
                     userManager.Create(entity, user.Password);
-                    var guy = ctx.Users.FirstOrDefault(u => u.Email == user.Email);
-                    userManager.AddToRole(guy.Id, "Admin");
+                    var newAdmin = ctx.Users.FirstOrDefault(u => u.Email == user.Email);
+                    userManager.AddToRole(newAdmin.Id, "Admin");
                     return true;
                 }
                 else
@@ -72,19 +75,12 @@ namespace ChoreTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                try
-                {
-                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-                    var s = userManager.GetRoles(_userId.ToString());
-                    if (s.Count != 0 && s[0].ToString() == "Admin")
-                        return true;
-                    else
-                        return false;
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                var s = userManager.GetRoles(_userId.ToString());
+                if (s.Count != 0 && s[0].ToString() == "Admin")
+                    return true;
+                else
+                    return false;
             }
         }
     }

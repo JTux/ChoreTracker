@@ -3,6 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ChoreTracker.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -31,6 +32,10 @@ namespace ChoreTracker.WebMVC.Data
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Reward> Rewards { get; set; }
+        public DbSet<GroupMember> GroupMembers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
