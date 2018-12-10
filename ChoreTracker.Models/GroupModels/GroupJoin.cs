@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChoreTracker.Models.GroupModels
 {
-    public class JoinGroup
+    public class GroupJoin
     {
         [Required]
         [Display(Name = "Group Invite Key")]

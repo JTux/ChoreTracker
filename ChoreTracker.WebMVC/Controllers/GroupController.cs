@@ -28,8 +28,6 @@ namespace ChoreTracker.WebMVC.Controllers
 
             var model = svc.GetGroupInfo();
 
-            ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
-
             return View(model);
         }
 
@@ -78,7 +76,7 @@ namespace ChoreTracker.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult JoinGroup(JoinGroup model)
+        public ActionResult JoinGroup(GroupJoin model)
         {
             var svc = GetGroupService();
 

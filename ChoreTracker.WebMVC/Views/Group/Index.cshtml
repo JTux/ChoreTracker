@@ -5,7 +5,6 @@
 }
 
 <h2>
-    @Html.DisplayFor(model => model.GroupOwner)'s 
     @Html.DisplayFor(model => model.GroupName)
 </h2>
 
@@ -29,19 +28,41 @@
         <td></td>
     </tr>
 </table>
-<table class="table">
-    <tr></tr>
-    <tr>
-        <th>Group Members</th>
-        <th>Earned Points</th>
-        <th></th>
-    </tr>
-    @foreach (var gm in ViewBag.GroupMembers)
-    {
+@if (Model.GroupMembers != null)
+{
+    <table class="table">
+        <tr></tr>
         <tr>
-            <td>@gm.UserName</td>
-            <td>@gm.RewardPoints</td>
-            <td></td>
+            <th>Group Members</th>
+            <th>Earned Points</th>
+            <th></th>
         </tr>
-    }
-</table>
+        @foreach (var gm in Model.GroupMembers)
+        {
+            <tr>
+                <td>@gm.UserName</td>
+                <td>@gm.RewardPoints</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+}
+@if (Model.GroupApplicants != null && Model.GroupApplicants.Count != 0)
+{
+    <table class="table">
+        <tr></tr>
+        <tr>
+            <th>Applicants</th>
+            <th>Earned Points</th>
+            <th></th>
+        </tr>
+        @foreach (var gm in Model.GroupApplicants)
+        {
+            <tr>
+                <td>@gm.UserName</td>
+                <td>@gm.RewardPoints</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+}

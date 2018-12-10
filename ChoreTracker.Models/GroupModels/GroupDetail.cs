@@ -20,5 +20,8 @@ namespace ChoreTracker.Models.GroupModels
 
         [Display(Name = "Group Owner")]
         public string GroupOwner { get; set; }
+
+        public List<GroupMemberDetail> GroupApplicants { get; set; }
+        public List<GroupMemberDetail> GroupMembers { get; set; }
     }
 }

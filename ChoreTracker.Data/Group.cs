@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChoreTracker.WebMVC.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,5 +21,7 @@ namespace ChoreTracker.Data
 
         [Required]
         public string GroupInviteKey { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
     }
 }
