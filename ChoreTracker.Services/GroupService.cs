@@ -29,7 +29,7 @@ namespace ChoreTracker.Services
                 if (groupMember == null)
                     group = ctx.Groups.FirstOrDefault(g => g.OwnerId == _userId);
                 else
-                    group = groupMember.Group;
+                    group = ctx.Groups.FirstOrDefault(g => g.GroupId == groupMember.GroupId);
 
                 if (group != null)
                 {
@@ -39,9 +39,7 @@ namespace ChoreTracker.Services
                         GroupId = group.GroupId,
                         GroupName = group.GroupName,
                         GroupInviteKey = group.GroupInviteKey,
-                        GroupOwner = owner.UserName,
-                        GroupApplicants = GetApplicants(group.GroupId),
-                        GroupMembers = GetGroupMembers(group.GroupId)
+                        GroupOwner = owner.UserName
                     };
                 }
 
@@ -49,32 +47,12 @@ namespace ChoreTracker.Services
             }
         }
 
-        private List<GroupMemberDetail> GetApplicants(int groupId)
+        public List<GroupMemberDetail> GetGroupMembers(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var members = new List<GroupMemberDetail>();
-                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == false);
-
-                foreach (var gm in groupMembers)
-                {
-                    var member = ctx.Users.Single(u => u.Id == gm.MemberId.ToString());
-                    members.Add(new GroupMemberDetail
-                    {
-                        UserName = member.UserName
-                    });
-                }
-
-                return members;
-            }
-        }
-
-        private List<GroupMemberDetail> GetGroupMembers(int groupId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var members = new List<GroupMemberDetail>();
-                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == true);
+                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId);
 
                 foreach (var gm in groupMembers)
                 {
@@ -120,16 +98,6 @@ namespace ChoreTracker.Services
             }
         }
 
-        public void EditGroupInviteKey()
-        {
-
-        }
-
-        private Group GetGroup()
-        {
-            return new Group();
-        }
-
         private string GenerateRandomString(int size)
         {
             var random = new Random();
@@ -144,7 +112,7 @@ namespace ChoreTracker.Services
             return builder.ToString();
         }
 
-        public bool JoinGroup(GroupJoin model)
+        public bool JoinGroup(JoinGroup model)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -155,8 +123,7 @@ namespace ChoreTracker.Services
                 var groupMember = new GroupMember
                 {
                     MemberId = _userId,
-                    GroupId = group.GroupId,
-                    InGroup = false
+                    GroupId = group.GroupId
                 };
 
                 ctx.GroupMembers.Add(groupMember);
