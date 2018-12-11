@@ -66,4 +66,23 @@
         }
     </table>
 }
+@if (ViewBag.Comments != null && ViewBag.Comments.Count != 0)
+{
+    <table>
+        <tr>
+            <th>
+                Comments
+            </th>
+        </tr>
+        @foreach (var c in ViewBag.Comments)
+        {
+            <tr>
+                <td>
+                    - @c.Content
+                </td>
+            </tr>
+        }
+    </table>
+}
+
 @Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.Models.CommentModels.CommentCreate { ParentId = 1, GroupId = Model.GroupId })

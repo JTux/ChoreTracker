@@ -34,13 +34,13 @@ namespace ChoreTracker.Services
             }
         }
 
-        public IEnumerable<CommentListItem> GetComments()
+        public IEnumerable<CommentListItem> GetGroupComments(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query = ctx
                     .Comments
-                    .Where(c => c.OwnerId == _userId)
+                    .Where(c => c.GroupId == groupId)
                     .Select(c =>
                     new CommentListItem
                     {
@@ -49,7 +49,7 @@ namespace ChoreTracker.Services
                         ParentId = c.ParentId
                     });
 
-                return query.ToArray();
+                return query.ToList();
             }
         }
     }

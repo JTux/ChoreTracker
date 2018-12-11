@@ -18,6 +18,7 @@ namespace ChoreTracker.WebMVC.Controllers
         public ActionResult Index()
         {
             var svc = GetGroupService();
+            var commentService = GetCommentService();
             if (!svc.CheckForExistingGroup())
             {
                 if (User.IsInRole("GroupOwner"))
@@ -30,6 +31,7 @@ namespace ChoreTracker.WebMVC.Controllers
             var model = svc.GetGroupInfo();
             ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
             ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
+            ViewBag.Comments = commentService.GetGroupComments(model.GroupId);
 
             return View(model);
         }
