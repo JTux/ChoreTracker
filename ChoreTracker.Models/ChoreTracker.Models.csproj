@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminModels\AdminUserCreate.cs" />
+    <Compile Include="CommentModels\CommentCreate.cs" />
+    <Compile Include="CommentModels\CommentListItem.cs" />
     <Compile Include="GroupModels\GroupCreate.cs" />
     <Compile Include="GroupModels\GroupDetail.cs" />
     <Compile Include="GroupModels\GroupMemberDetail.cs" />

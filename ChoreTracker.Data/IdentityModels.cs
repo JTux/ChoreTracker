@@ -36,9 +36,10 @@ namespace ChoreTracker.WebMVC.Data
             return new ApplicationDbContext();
         }
 
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<Reward> Rewards { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
+        public DbSet<Reward> Rewards { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
