@@ -28,7 +28,7 @@
         <td></td>
     </tr>
 </table>
-@if (Model.GroupMembers != null)
+@if (ViewBag.GroupMembers != null)
 {
     <table class="table">
         <tr></tr>
@@ -37,7 +37,7 @@
             <th>Earned Points</th>
             <th></th>
         </tr>
-        @foreach (var gm in Model.GroupMembers)
+        @foreach (var gm in ViewBag.GroupMembers)
         {
             <tr>
                 <td>@gm.UserName</td>
@@ -47,7 +47,7 @@
         }
     </table>
 }
-@if (Model.GroupApplicants != null && Model.GroupApplicants.Count != 0)
+@if (ViewBag.GroupApplicants != null && ViewBag.GroupApplicants.Count != 0)
 {
     <table class="table">
         <tr></tr>
@@ -56,7 +56,7 @@
             <th>Earned Points</th>
             <th></th>
         </tr>
-        @foreach (var gm in Model.GroupApplicants)
+        @foreach (var gm in ViewBag.GroupApplicants)
         {
             <tr>
                 <td>@gm.UserName</td>
@@ -66,3 +66,4 @@
         }
     </table>
 }
+@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.Models.CommentModels.CommentCreate { ParentId = 1, GroupId = Model.GroupId })

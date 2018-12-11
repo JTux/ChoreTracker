@@ -39,9 +39,7 @@ namespace ChoreTracker.Services
                         GroupId = group.GroupId,
                         GroupName = group.GroupName,
                         GroupInviteKey = group.GroupInviteKey,
-                        GroupOwner = owner.UserName,
-                        GroupApplicants = GetApplicants(group.GroupId),
-                        GroupMembers = GetGroupMembers(group.GroupId)
+                        GroupOwner = owner.UserName
                     };
                 }
 
@@ -49,7 +47,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        private List<GroupMemberDetail> GetApplicants(int groupId)
+        public List<GroupMemberDetail> GetApplicants(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -69,7 +67,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        private List<GroupMemberDetail> GetGroupMembers(int groupId)
+        public List<GroupMemberDetail> GetGroupMembers(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {

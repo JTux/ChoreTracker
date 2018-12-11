@@ -1,4 +1,5 @@
-﻿using ChoreTracker.Models.GroupModels;
+﻿using ChoreTracker.Models.CommentModels;
+using ChoreTracker.Models.GroupModels;
 using ChoreTracker.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -27,8 +28,23 @@ namespace ChoreTracker.WebMVC.Controllers
             }
 
             var model = svc.GetGroupInfo();
+            ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
+            ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(CommentCreate model)
+        {
+            var svc = GetCommentService();
+
+            if (svc.CreateComment(model))
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Group/Create
@@ -91,5 +107,6 @@ namespace ChoreTracker.WebMVC.Controllers
         }
 
         private GroupService GetGroupService() => new GroupService(Guid.Parse(User.Identity.GetUserId()));
+        private CommentService GetCommentService() => new CommentService(Guid.Parse(User.Identity.GetUserId()));
     }
 }

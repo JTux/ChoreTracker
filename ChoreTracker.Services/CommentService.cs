@@ -23,7 +23,8 @@ namespace ChoreTracker.Services
             {
                 OwnerId = _userId,
                 Content = model.Content,
-                ParentId = model.ParentId
+                ParentId = model.ParentId,
+                GroupId = model.GroupId
             };
 
             using (var ctx = new ApplicationDbContext())
