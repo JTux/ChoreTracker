@@ -17,5 +17,9 @@ namespace ChoreTracker.Data
 
         [Required]
         public Guid MemberId { get; set; }
+
+        public bool InGroup { get; set; }
+
+        public virtual Group Group { get; set; }
     }
 }

@@ -155,7 +155,7 @@ namespace ChoreTracker.WebMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 using (var ctx = new ApplicationDbContext())
@@ -178,9 +178,10 @@ namespace ChoreTracker.WebMVC.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     if (model.UserRole.ToString() == "GroupOwner")
-                    {
                         return RedirectToAction("Create", "Group");
-                    }
+
+                    if (model.UserRole.ToString() == "GroupMember")
+                        return RedirectToAction("JoinGroup", "Group");
 
                     return RedirectToAction("Index", "Home");
                 }

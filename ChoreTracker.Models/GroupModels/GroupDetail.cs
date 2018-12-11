@@ -17,5 +17,11 @@ namespace ChoreTracker.Models.GroupModels
 
         [Display(Name = "Group Invite Key")]
         public string GroupInviteKey { get; set; }
+
+        [Display(Name = "Group Owner")]
+        public string GroupOwner { get; set; }
+
+        public List<GroupMemberDetail> GroupApplicants { get; set; }
+        public List<GroupMemberDetail> GroupMembers { get; set; }
     }
 }
