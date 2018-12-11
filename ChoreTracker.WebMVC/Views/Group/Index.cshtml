@@ -1,4 +1,5 @@
-﻿@model ChoreTracker.Models.GroupModels.GroupDetail
+﻿@using Microsoft.AspNet.Identity
+@model ChoreTracker.Models.GroupModels.GroupDetail
 
 @{
     ViewBag.Title = @Html.DisplayFor(model => model.GroupName);
@@ -76,9 +77,18 @@
         </tr>
         @foreach (var c in ViewBag.Comments)
         {
+            var comment = new ChoreTracker.Models.CommentModels.CommentListItem
+            {
+                Content = c.Content,
+                CommentId = c.CommentId,
+                ParentId = c.ParentId,
+                Poster = c.Poster,
+                OwnerId = c.OwnerId
+            };
+
             <tr>
                 <td>
-                    - @c.Content
+                    @Html.Partial("~/Views/Comment/_CommentDisplay.cshtml", comment)
                 </td>
             </tr>
         }

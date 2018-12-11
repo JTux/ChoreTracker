@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNet.Identity
+@model ChoreTracker.Models.CommentModels.CommentListItem
+
+<div class="userComment">
+    <h6 class="commentPoster">
+        @Model.Poster:
+    </h6>
+    @Html.DisplayFor(Model => Model.Content)
+</div>
+<div class="comment-option">
+    @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()))
+    {
+        @Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
+        @Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
+    }
+    @Html.ActionLink("Reply", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
+</div>

@@ -44,6 +44,8 @@ namespace ChoreTracker.Services
                     .Select(c =>
                     new CommentListItem
                     {
+                        Poster = ctx.Users.FirstOrDefault(u=>u.Id == c.OwnerId.ToString()).UserName,
+                        OwnerId = c.OwnerId,
                         CommentId = c.CommentId,
                         Content = c.Content,
                         ParentId = c.ParentId

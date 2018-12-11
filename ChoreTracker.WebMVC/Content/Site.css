@@ -22,3 +22,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.commentPoster {
+    font-weight: bold;
+}
+
+.userComment {
+    margin: 9px 0 -2px 0;
+    padding: 5px 15px;
+    background-color: #eeeeee;
+    border: solid 1px darkgrey;
+    border-radius: 5px;
+}
+
+.comment-button {
+    color: rebeccapurple;
+    padding: 0 5px;
+    float: right;
+}
+
+.comment-options {
+    text-align: right;
+}
