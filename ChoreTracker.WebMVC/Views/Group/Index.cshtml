@@ -5,7 +5,7 @@
 }
 
 <h2>
-    @Html.DisplayFor(model => model.GroupOwner)'s 
+    @Html.DisplayFor(model => model.GroupOwner)'s
     @Html.DisplayFor(model => model.GroupName)
 </h2>
 
@@ -45,3 +45,5 @@
         </tr>
     }
 </table>
+
+@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.Models.CommentModels.CommentCreate { ParentId = 1, GroupId = Model.GroupId })

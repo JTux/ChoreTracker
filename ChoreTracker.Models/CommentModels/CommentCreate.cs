@@ -8,6 +8,7 @@ namespace ChoreTracker.Models.CommentModels
 {
     public class CommentCreate
     {
+        public int GroupId { get; set; }
         public int ParentId { get; set; }
         public string Content { get; set; }
     }
