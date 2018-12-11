@@ -1,5 +1,6 @@
 ﻿using ChoreTracker.Models.CommentModels;
 using ChoreTracker.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,6 @@ namespace ChoreTracker.WebMVC.Controllers
             return View(model);
         }
 
-        private CommentService GetCommentService() => new CommentService(Guid.Parse(User.Identity.ToString()));
+        private CommentService GetCommentService() => new CommentService(Guid.Parse(User.Identity.GetUserId()));
     }
 }

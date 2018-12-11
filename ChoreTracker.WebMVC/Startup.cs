@@ -29,8 +29,10 @@ namespace ChoreTracker.WebMVC
                 roleManager.Create(role);
 
                 var user = new ApplicationUser();
-                user.UserName = "Josh";
+                user.UserName = "admin";
                 user.Email = "admin@admin.com";
+                user.FirstName = "Mr";
+                user.LastName = "Admin";
 
                 string password = "Test1!";
 
