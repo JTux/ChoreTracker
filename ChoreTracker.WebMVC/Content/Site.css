@@ -33,6 +33,7 @@ textarea {
     background-color: #eeeeee;
     border: solid 1px darkgrey;
     border-radius: 5px;
+    width: 100%;
 }
 
 .comment-button {
@@ -43,4 +44,9 @@ textarea {
 
 .comment-options {
     text-align: right;
+}
+
+.comment-box {
+    max-width: 100%;
+    height: auto;   
 }
