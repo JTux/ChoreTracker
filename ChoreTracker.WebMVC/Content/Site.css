@@ -20,14 +20,22 @@
 input,
 select,
 textarea {
-    max-width: 280px;
 }
 
-.commentPoster {
-    font-weight: bold;
+.comment-table {
 }
 
-.userComment {
+.comment-row {
+}
+
+.comment-cell {
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+.user-comment {
     margin: 9px 0 -2px 0;
     padding: 5px 15px;
     background-color: #eeeeee;
@@ -36,10 +44,8 @@ textarea {
     width: 100%;
 }
 
-.comment-button {
-    color: rebeccapurple;
-    padding: 0 5px;
-    float: right;
+.comment-poster {
+    font-weight: bold;
 }
 
 .comment-options {
@@ -49,4 +55,10 @@ textarea {
 .comment-box {
     max-width: 100%;
     height: auto;   
+}
+
+.comment-button {
+    color: rebeccapurple;
+    padding: 0 5px;
+    float: right;
 }

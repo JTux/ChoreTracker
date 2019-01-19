@@ -294,6 +294,7 @@
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Comment\_CommentCreate.cshtml" />
     <Content Include="Views\Comment\_CommentDisplay.cshtml" />
+    <Content Include="Views\Group\ModalPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

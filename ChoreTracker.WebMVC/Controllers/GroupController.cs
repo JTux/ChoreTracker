@@ -92,6 +92,17 @@ namespace ChoreTracker.WebMVC.Controllers
             return View();
         }
 
+        public ActionResult ModalPopUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ModalPopUp(int i)
+        {
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult JoinGroup(GroupJoin model)

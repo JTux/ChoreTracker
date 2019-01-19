@@ -44,7 +44,7 @@ namespace ChoreTracker.Services
                     .Select(c =>
                     new CommentListItem
                     {
-                        Poster = ctx.Users.FirstOrDefault(u=>u.Id == c.OwnerId.ToString()).UserName,
+                        Poster = ctx.Users.FirstOrDefault(u => u.Id == c.OwnerId.ToString()).UserName,
                         OwnerId = c.OwnerId,
                         CommentId = c.CommentId,
                         Content = c.Content,
@@ -52,6 +52,21 @@ namespace ChoreTracker.Services
                     });
 
                 return query.ToList();
+            }
+        }
+
+        public CommentDetail GetCommentById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var comment = ctx.Comments.FirstOrDefault(c => c.CommentId == id);
+
+                return new CommentDetail
+                {
+                    CommentId = comment.CommentId,
+                    Content = comment.Content,
+                    Poster = ctx.Users.FirstOrDefault(u => u.Id == comment.OwnerId.ToString()).UserName
+                };
             }
         }
     }
