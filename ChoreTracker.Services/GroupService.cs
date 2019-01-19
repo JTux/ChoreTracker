@@ -104,7 +104,7 @@ namespace ChoreTracker.Services
             {
                 GroupName = model.GroupName,
                 OwnerId = _userId,
-                GroupInviteKey = GenerateRandomString(6)
+                GroupInviteKey = GenerateRandomString(8)
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -133,13 +133,26 @@ namespace ChoreTracker.Services
             var random = new Random();
             var builder = new StringBuilder();
             char character;
+            bool isUnique = false;
 
-            for (int i = 0; i < size; i++)
+            string key = "";
+
+            while (!isUnique)
             {
-                character = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
-                builder.Append(character);
+                for (int i = 0; i < size; i++)
+                {
+                    character = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                    builder.Append(character);
+                }
+
+                key = builder.ToString();
+
+                using (var ctx = new ApplicationDbContext())
+                {
+                    isUnique = ctx.Groups.Where(g => g.GroupInviteKey == key).Count() == 0;
+                }
             }
-            return builder.ToString();
+            return key;
         }
 
         public bool JoinGroup(GroupJoin model)
