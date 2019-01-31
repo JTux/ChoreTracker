@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,8 +7,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ChoreTracker.WebMVC.Models;
 using ChoreTracker.Data;
-using ChoreTracker.Models.RoleModels;
-using ChoreTracker.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ChoreTracker.WebMVC.Controllers

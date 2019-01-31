@@ -315,10 +315,6 @@
       <Project>{F8B7703E-851E-4B32-A205-7315004C2DBD}</Project>
       <Name>ChoreTracker.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ChoreTracker.Models\ChoreTracker.Models.csproj">
-      <Project>{f8634e90-7f83-404f-8f14-3674dfe2e507}</Project>
-      <Name>ChoreTracker.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ChoreTracker.Services.DataContract\ChoreTracker.Services.DataContract.csproj">
       <Project>{905c9a39-ffc4-41a3-899a-068b944032a1}</Project>
       <Name>ChoreTracker.Services.DataContract</Name>

@@ -1,5 +1,7 @@
 ﻿using ChoreTracker.Data;
-using ChoreTracker.Models.RewardModels;
+using ChoreTracker.Data.Entities;
+using ChoreTracker.Services.DataContract.Reward;
+using ChoreTracker.WebMVC.DataContract.Reward;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +16,11 @@ namespace ChoreTracker.Services
             _userId = userId;
         }
 
-        public bool CreateReward(RewardCreate model)
+        public bool CreateReward(RewardCreateRAO model)
         {
             var groupService = new GroupService(_userId);
 
-            var reward = new Reward
+            var reward = new RewardEntity
             {
                 RewardName = model.RewardName,
                 Description = model.RewardDescription,
@@ -33,7 +35,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        public List<RewardListItem> GetRewards()
+        public List<RewardListItemDTO> GetRewards()
         {
             var groupService = new GroupService(_userId);
 
@@ -45,7 +47,7 @@ namespace ChoreTracker.Services
                     .Rewards
                     .Where(r => r.GroupId == groupId)
                     .Select(r =>
-                        new RewardListItem
+                        new RewardListItemDTO
                         {
                             RewardId = r.RewardId,
                             RewardName = r.RewardName,

@@ -36,15 +36,15 @@ namespace ChoreTracker.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(CommentCreateDTO model)
+        public ActionResult Index(CommentCreateDTO dto)
         {
             var svc = GetCommentService();
 
             var rao = new CommentCreateRAO
             {
-                Content = model.Content,
-                GroupId = model.GroupId,
-                ParentId = model.ParentId
+                Content = dto.Content,
+                GroupId = dto.GroupId,
+                ParentId = dto.ParentId
             };
 
             if (svc.CreateComment(rao))
@@ -69,15 +69,15 @@ namespace ChoreTracker.WebMVC.Controllers
         // POST: Group/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(GroupCreateDTO model)
+        public ActionResult Create(GroupCreateDTO dto)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(dto);
             }
 
             var svc = GetGroupService();
-            var rao = new GroupCreateRAO { GroupName = model.GroupName };
+            var rao = new GroupCreateRAO { GroupName = dto.GroupName };
 
 
             if (svc.CreateGroup(rao))
@@ -112,14 +112,14 @@ namespace ChoreTracker.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult JoinGroup(GroupJoinDTO model)
+        public ActionResult JoinGroup(GroupJoinDTO dto)
         {
             var svc = GetGroupService();
 
             if (!ModelState.IsValid)
-                return View(model);
+                return View(dto);
 
-            var rao = new GroupJoinRAO { GroupInviteKey = model.GroupInviteKey };
+            var rao = new GroupJoinRAO { GroupInviteKey = dto.GroupInviteKey };
 
             if (svc.JoinGroup(rao))
                 return RedirectToAction("Index");
