@@ -1,12 +1,7 @@
-﻿using ChoreTracker.Models.AdminModels;
-using ChoreTracker.Services;
-using ChoreTracker.Data;
+﻿using ChoreTracker.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ChoreTracker.WebMVC.DataContract.Admin;
 using ChoreTracker.Services.DataContract.Admin;
