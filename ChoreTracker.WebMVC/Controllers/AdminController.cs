@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ChoreTracker.WebMVC.DataContract.Admin;
+using ChoreTracker.Services.DataContract.Admin;
 
 namespace ChoreTracker.WebMVC.Controllers
 {
@@ -51,7 +53,7 @@ namespace ChoreTracker.WebMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdminCreate(AdminUserCreate user)
+        public ActionResult AdminCreate(AdminUserCreateDTO user)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +65,15 @@ namespace ChoreTracker.WebMVC.Controllers
             if (!service.IsAdminUser())
                 return RedirectToAction("Index", "Home");
 
-            if (!service.CreateNewAdmin(user))
+            var rao = new AdminUserCreateRAO
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Password = user.Password,
+                ConfirmPassword = user.ConfirmPassword
+            };
+
+            if (!service.CreateNewAdmin(rao))
                 return View(user);
 
             return RedirectToAction("Index");

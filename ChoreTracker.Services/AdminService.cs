@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ChoreTracker.Services.DataContract.Admin;
 
 namespace ChoreTracker.Services
 {
@@ -27,7 +28,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        public bool CreateNewAdmin(AdminUserCreate user)
+        public bool CreateNewAdmin(AdminUserCreateRAO user)
         {
             if (user.Password != user.ConfirmPassword)
                 return false;

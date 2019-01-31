@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminUserCreateRAO.cs" />
     <Compile Include="Comment\CommentCreateRAO.cs" />
     <Compile Include="Comment\CommentDetailRAO.cs" />
     <Compile Include="Comment\CommentListItemRAO.cs" />

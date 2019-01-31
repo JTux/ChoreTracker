@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminUserCreateDTO.cs" />
     <Compile Include="Comment\CommentCreateDTO.cs" />
     <Compile Include="Comment\CommentDetailDTO.cs" />
     <Compile Include="Comment\CommentListItemDTO.cs" />
