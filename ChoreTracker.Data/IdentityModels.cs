@@ -38,9 +38,9 @@ namespace ChoreTracker.Data
 
         public DbSet<GroupEntity> Groups { get; set; }
         public DbSet<CommentEntity> Comments { get; set; }
+        public DbSet<RewardEntity> Rewards { get; set; }
 
         public DbSet<GroupMember> GroupMembers { get; set; }
-        public DbSet<Reward> Rewards { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,14 +1,8 @@
-﻿using ChoreTracker.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.Data
+namespace ChoreTracker.Data.Entities
 {
-    public class Reward
+    public class RewardEntity
     {
         [Key]
         public int RewardId { get; set; }
@@ -24,7 +18,7 @@ namespace ChoreTracker.Data
 
         [Required]
         public string Description { get; set; }
-        
+
         public virtual GroupEntity Group { get; set; }
     }
 }

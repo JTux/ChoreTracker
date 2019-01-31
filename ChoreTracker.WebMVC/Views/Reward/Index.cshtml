@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ChoreTracker.Models.RewardModels.RewardListItem>
+﻿@model IEnumerable<ChoreTracker.WebMVC.DataContract.Reward.RewardListItemDTO>
 
 @{
     ViewBag.Title = "Index";
@@ -26,26 +26,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RewardId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RewardName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RewardDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RewardCost)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RewardId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RewardName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RewardDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RewardCost)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RewardId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RewardId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RewardId })
+            </td>
+        </tr>
+    }
 
 </table>
