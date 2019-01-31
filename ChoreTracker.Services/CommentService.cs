@@ -1,5 +1,8 @@
 ﻿using ChoreTracker.Data;
+using ChoreTracker.Data.Entities;
 using ChoreTracker.Models.CommentModels;
+using ChoreTracker.Services.DataContract.Comment;
+using ChoreTracker.WebMVC.DataContract.Comment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +17,9 @@ namespace ChoreTracker.Services
             _userId = userId;
         }
 
-        public bool CreateComment(CommentCreate model)
+        public bool CreateComment(CommentCreateRAO model)
         {
-            var comment = new Comment
+            var comment = new CommentEntity
             {
                 OwnerId = _userId,
                 Content = model.Content,
@@ -31,7 +34,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        public IEnumerable<CommentListItem> GetGroupComments(int groupId)
+        public IEnumerable<CommentListItemDTO> GetGroupComments(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -39,7 +42,7 @@ namespace ChoreTracker.Services
                     .Comments
                     .Where(c => c.GroupId == groupId)
                     .Select(c =>
-                    new CommentListItem
+                    new CommentListItemDTO
                     {
                         Poster = ctx.Users.FirstOrDefault(u => u.Id == c.OwnerId.ToString()).UserName,
                         OwnerId = c.OwnerId,
@@ -52,13 +55,13 @@ namespace ChoreTracker.Services
             }
         }
 
-        public CommentDetail GetCommentById(int id)
+        public CommentDetailDTO GetCommentById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var comment = ctx.Comments.FirstOrDefault(c => c.CommentId == id);
 
-                return new CommentDetail
+                return new CommentDetailDTO
                 {
                     CommentId = comment.CommentId,
                     Content = comment.Content,

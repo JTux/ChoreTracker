@@ -1,7 +1,9 @@
 ﻿using ChoreTracker.Models.CommentModels;
 using ChoreTracker.Models.GroupModels;
 using ChoreTracker.Services;
+using ChoreTracker.Services.DataContract.Comment;
 using ChoreTracker.Services.DataContract.Group;
+using ChoreTracker.WebMVC.DataContract.Comment;
 using ChoreTracker.WebMVC.DataContract.Group;
 using Microsoft.AspNet.Identity;
 using System;
@@ -40,11 +42,18 @@ namespace ChoreTracker.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(CommentCreate model)
+        public ActionResult Index(CommentCreateDTO model)
         {
             var svc = GetCommentService();
 
-            if (svc.CreateComment(model))
+            var rao = new CommentCreateRAO
+            {
+                Content = model.Content,
+                GroupId = model.GroupId,
+                ParentId = model.ParentId
+            };
+
+            if (svc.CreateComment(rao))
             {
                 return RedirectToAction("Index");
             }

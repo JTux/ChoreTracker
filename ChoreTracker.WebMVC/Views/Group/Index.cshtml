@@ -77,7 +77,7 @@
         </tr>
         @foreach (var c in ViewBag.Comments)
         {
-            var comment = new ChoreTracker.Models.CommentModels.CommentListItem
+            var comment = new ChoreTracker.WebMVC.DataContract.Comment.CommentListItemDTO
             {
                 Content = c.Content,
                 CommentId = c.CommentId,
@@ -95,4 +95,4 @@
     </table>
 }
 
-@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.Models.CommentModels.CommentCreate { ParentId = 1, GroupId = Model.GroupId })
+@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO { ParentId = 1, GroupId = Model.GroupId })

@@ -36,8 +36,9 @@ namespace ChoreTracker.Data
             return new ApplicationDbContext();
         }
 
-        public DbSet<Comment> Comments { get; set; }
         public DbSet<GroupEntity> Groups { get; set; }
+        public DbSet<CommentEntity> Comments { get; set; }
+
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Reward> Rewards { get; set; }
 
