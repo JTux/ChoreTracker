@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ChoreTracker.WebMVC.Models;
-using ChoreTracker.WebMVC.Data;
+using ChoreTracker.Data;
 using ChoreTracker.Models.RoleModels;
 using ChoreTracker.Services;
 using Microsoft.AspNet.Identity.EntityFramework;

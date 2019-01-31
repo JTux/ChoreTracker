@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ChoreTracker.Data;
+using ChoreTracker.Data.Entities;
 using ChoreTracker.Models.GroupModels;
-using ChoreTracker.Models.RewardModels;
-using ChoreTracker.WebMVC.Data;
+using ChoreTracker.Services.DataContract.Group;
+using ChoreTracker.WebMVC.DataContract.Group;
 
 namespace ChoreTracker.Services
 {
@@ -19,11 +19,11 @@ namespace ChoreTracker.Services
             _userId = userId;
         }
 
-        public GroupDetail GetGroupInfo()
+        public GroupDetailDTO GetGroupInfo()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                Group group;
+                GroupEntity group;
                 var groupMember = ctx.GroupMembers.FirstOrDefault(g => g.MemberId == _userId);
 
                 if (groupMember == null)
@@ -34,7 +34,7 @@ namespace ChoreTracker.Services
                 if (group != null)
                 {
                     var owner = ctx.Users.FirstOrDefault(u => u.Id == group.OwnerId.ToString());
-                    return new GroupDetail
+                    return new GroupDetailDTO
                     {
                         GroupId = group.GroupId,
                         GroupName = group.GroupName,
@@ -43,21 +43,21 @@ namespace ChoreTracker.Services
                     };
                 }
 
-                return new GroupDetail();
+                return new GroupDetailDTO();
             }
         }
 
-        public List<GroupMemberDetail> GetApplicants(int groupId)
+        public List<GroupMemberDetailDTO> GetApplicants(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var members = new List<GroupMemberDetail>();
+                var members = new List<GroupMemberDetailDTO>();
                 var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == false);
 
                 foreach (var gm in groupMembers)
                 {
                     var member = ctx.Users.Single(u => u.Id == gm.MemberId.ToString());
-                    members.Add(new GroupMemberDetail
+                    members.Add(new GroupMemberDetailDTO
                     {
                         UserName = member.UserName
                     });
@@ -67,17 +67,17 @@ namespace ChoreTracker.Services
             }
         }
 
-        public List<GroupMemberDetail> GetGroupMembers(int groupId)
+        public List<GroupMemberDetailDTO> GetGroupMembers(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var members = new List<GroupMemberDetail>();
+                var members = new List<GroupMemberDetailDTO>();
                 var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == true);
 
                 foreach (var gm in groupMembers)
                 {
                     var member = ctx.Users.Single(u => u.Id == gm.MemberId.ToString());
-                    members.Add(new GroupMemberDetail
+                    members.Add(new GroupMemberDetailDTO
                     {
                         UserName = member.UserName
                     });
@@ -98,9 +98,9 @@ namespace ChoreTracker.Services
             }
         }
 
-        public bool CreateGroup(GroupCreate model)
+        public bool CreateGroup(GroupCreateRAO model)
         {
-            var newGroup = new Group
+            var newGroup = new GroupEntity
             {
                 GroupName = model.GroupName,
                 OwnerId = _userId,
@@ -121,11 +121,6 @@ namespace ChoreTracker.Services
         public void EditGroupInviteKey()
         {
 
-        }
-
-        private Group GetGroup()
-        {
-            return new Group();
         }
 
         private string GenerateRandomString(int size)
@@ -155,7 +150,7 @@ namespace ChoreTracker.Services
             return key;
         }
 
-        public bool JoinGroup(GroupJoin model)
+        public bool JoinGroup(GroupJoinRAO model)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -167,7 +162,7 @@ namespace ChoreTracker.Services
                 {
                     MemberId = _userId,
                     GroupId = group.GroupId,
-                    InGroup = false
+                    InGroup = true
                 };
 
                 ctx.GroupMembers.Add(groupMember);

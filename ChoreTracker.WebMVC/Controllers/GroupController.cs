@@ -1,6 +1,8 @@
 ﻿using ChoreTracker.Models.CommentModels;
 using ChoreTracker.Models.GroupModels;
 using ChoreTracker.Services;
+using ChoreTracker.Services.DataContract.Group;
+using ChoreTracker.WebMVC.DataContract.Group;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -64,7 +66,7 @@ namespace ChoreTracker.WebMVC.Controllers
         // POST: Group/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(GroupCreate model)
+        public ActionResult Create(GroupCreateDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -72,8 +74,10 @@ namespace ChoreTracker.WebMVC.Controllers
             }
 
             var svc = GetGroupService();
+            var rao = new GroupCreateRAO { GroupName = model.GroupName };
 
-            if (svc.CreateGroup(model))
+
+            if (svc.CreateGroup(rao))
             {
                 return RedirectToAction("Index");
             }
@@ -105,14 +109,16 @@ namespace ChoreTracker.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult JoinGroup(GroupJoin model)
+        public ActionResult JoinGroup(GroupJoinDTO model)
         {
             var svc = GetGroupService();
 
             if (!ModelState.IsValid)
                 return View(model);
 
-            if (svc.JoinGroup(model))
+            var rao = new GroupJoinRAO { GroupInviteKey = model.GroupInviteKey };
+
+            if (svc.JoinGroup(rao))
                 return RedirectToAction("Index");
 
             ModelState.AddModelError("", "Could not join group.");

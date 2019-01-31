@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ChoreTracker.Data
+namespace ChoreTracker.Data.Entities
 {
-    public class Group
+    public class GroupEntity
     {
         [Key]
         public int GroupId { get; set; }

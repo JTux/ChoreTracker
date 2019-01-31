@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChoreTracker.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +21,6 @@ namespace ChoreTracker.Data
 
         public bool InGroup { get; set; }
 
-        public virtual Group Group { get; set; }
+        public virtual GroupEntity Group { get; set; }
     }
 }

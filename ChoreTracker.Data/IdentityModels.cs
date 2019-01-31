@@ -3,11 +3,11 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ChoreTracker.Data;
+using ChoreTracker.Data.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace ChoreTracker.WebMVC.Data
+namespace ChoreTracker.Data
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -37,7 +37,7 @@ namespace ChoreTracker.WebMVC.Data
         }
 
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupEntity> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Reward> Rewards { get; set; }
 
