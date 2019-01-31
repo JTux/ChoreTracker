@@ -1,12 +1,9 @@
-﻿using ChoreTracker.Models.RewardModels;
-using ChoreTracker.Services;
+﻿using ChoreTracker.Services;
+using ChoreTracker.Services.DataContract.Reward;
+using ChoreTracker.WebMVC.DataContract.Reward;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace ChoreTracker.WebMVC.Controllers
 {
@@ -28,15 +25,22 @@ namespace ChoreTracker.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RewardCreate model)
+        public ActionResult Create(RewardCreateDTO dto)
         {
             var svc = CreateRewardService();
-            if (svc.CreateReward(model))
+            var rao = new RewardCreateRAO
+            {
+                RewardCost = dto.RewardCost,
+                RewardDescription = dto.RewardDescription,
+                RewardName = dto.RewardName
+            };
+
+            if (svc.CreateReward(rao))
             {
                 return RedirectToAction("Index", "Group", null);
             }
 
-            return View(model);
+            return View(dto);
         }
 
         private RewardService CreateRewardService() => new RewardService(Guid.Parse(User.Identity.GetUserId()));

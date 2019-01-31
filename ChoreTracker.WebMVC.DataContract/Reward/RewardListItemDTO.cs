@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.Models.RewardModels
+namespace ChoreTracker.WebMVC.DataContract.Reward
 {
-    public class RewardCreate
+    public class RewardListItemDTO
     {
+        [Required]
+        public int RewardId { get; set; }
+
         [Required]
         [Display(Name = "Name of Reward")]
         public string RewardName { get; set; }

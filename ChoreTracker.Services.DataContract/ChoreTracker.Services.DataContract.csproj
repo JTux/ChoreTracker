@@ -50,6 +50,9 @@
     <Compile Include="Group\GroupJoinRAO.cs" />
     <Compile Include="Group\GroupMemberDetailRAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reward\RewardCreateRAO.cs" />
+    <Compile Include="Reward\RewardListItemRAO.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

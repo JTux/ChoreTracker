@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChoreTracker.Data.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChoreTracker.Data
@@ -14,6 +15,6 @@ namespace ChoreTracker.Data
         [Required]
         public Guid OwnerId { get; set; }
 
-        public virtual Reward Reward { get; set; }
+        public virtual RewardEntity Reward { get; set; }
     }
 }

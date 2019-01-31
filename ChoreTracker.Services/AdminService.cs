@@ -1,5 +1,4 @@
 ﻿using ChoreTracker.Contracts;
-using ChoreTracker.Models.AdminModels;
 using ChoreTracker.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

@@ -1,6 +1,5 @@
 ﻿using ChoreTracker.Data;
 using ChoreTracker.Data.Entities;
-using ChoreTracker.Models.CommentModels;
 using ChoreTracker.Services.DataContract.Comment;
 using ChoreTracker.WebMVC.DataContract.Comment;
 using System;

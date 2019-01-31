@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using ChoreTracker.Data;
 using ChoreTracker.Data.Entities;
-using ChoreTracker.Models.GroupModels;
 using ChoreTracker.Services.DataContract.Group;
 using ChoreTracker.WebMVC.DataContract.Group;
 

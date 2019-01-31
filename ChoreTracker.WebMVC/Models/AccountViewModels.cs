@@ -1,9 +1,10 @@
-﻿using ChoreTracker.Models.RoleModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChoreTracker.WebMVC.Models
 {
+    public enum Role { GroupOwner = 1, GroupMember }
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
