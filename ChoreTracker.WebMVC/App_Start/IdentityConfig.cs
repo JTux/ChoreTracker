@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ChoreTracker.WebMVC.Models;
-using ChoreTracker.WebMVC.Data;
+using ChoreTracker.Data;
 
 namespace ChoreTracker.WebMVC
 {

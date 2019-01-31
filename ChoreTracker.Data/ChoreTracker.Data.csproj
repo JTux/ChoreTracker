@@ -77,7 +77,8 @@
   <ItemGroup>
     <Compile Include="ClaimedReward.cs" />
     <Compile Include="Comment.cs" />
-    <Compile Include="Group.cs" />
+    <Compile Include="Entities\CommentEntity.cs" />
+    <Compile Include="Entities\GroupEntity.cs" />
     <Compile Include="GroupMember.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

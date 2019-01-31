@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ChoreTracker.WebMVC.Models;
-using ChoreTracker.WebMVC.Data;
+using ChoreTracker.Data;
 
 namespace ChoreTracker.WebMVC
 {

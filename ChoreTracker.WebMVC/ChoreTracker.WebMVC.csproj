@@ -319,9 +319,17 @@
       <Project>{f8634e90-7f83-404f-8f14-3674dfe2e507}</Project>
       <Name>ChoreTracker.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ChoreTracker.Services.DataContract\ChoreTracker.Services.DataContract.csproj">
+      <Project>{905c9a39-ffc4-41a3-899a-068b944032a1}</Project>
+      <Name>ChoreTracker.Services.DataContract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChoreTracker.Services\ChoreTracker.Services.csproj">
       <Project>{E05344D2-E00B-475E-8CC8-DD8E53BC464E}</Project>
       <Name>ChoreTracker.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChoreTracker.WebMVC.DataContract\ChoreTracker.WebMVC.DataContract.csproj">
+      <Project>{a25be0fb-f71c-4f17-9792-85db54b50e92}</Project>
+      <Name>ChoreTracker.WebMVC.DataContract</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

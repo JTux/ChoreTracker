@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChoreTracker.Services", "Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChoreTracker.WebMVC", "ChoreTracker.WebMVC\ChoreTracker.WebMVC.csproj", "{28B216B3-38ED-437C-A970-C84BEC8DD31A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChoreTracker.Services.DataContract", "ChoreTracker.Services.DataContract\ChoreTracker.Services.DataContract.csproj", "{905C9A39-FFC4-41A3-899A-068B944032A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChoreTracker.WebMVC.DataContract", "ChoreTracker.WebMVC.DataContract\ChoreTracker.WebMVC.DataContract.csproj", "{A25BE0FB-F71C-4F17-9792-85DB54B50E92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{28B216B3-38ED-437C-A970-C84BEC8DD31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28B216B3-38ED-437C-A970-C84BEC8DD31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28B216B3-38ED-437C-A970-C84BEC8DD31A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{905C9A39-FFC4-41A3-899A-068B944032A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{905C9A39-FFC4-41A3-899A-068B944032A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{905C9A39-FFC4-41A3-899A-068B944032A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{905C9A39-FFC4-41A3-899A-068B944032A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A25BE0FB-F71C-4F17-9792-85DB54B50E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A25BE0FB-F71C-4F17-9792-85DB54B50E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A25BE0FB-F71C-4F17-9792-85DB54B50E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A25BE0FB-F71C-4F17-9792-85DB54B50E92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,5 @@
 ﻿using System;
-using ChoreTracker.WebMVC.Data;
+using ChoreTracker.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
