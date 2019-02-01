@@ -37,13 +37,13 @@ namespace ChoreTracker.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(CommentCreateDTO dto, int CommentId)
+        public ActionResult Index(CommentCreateDTO dto, int? CommentId)
         {
             if(dto.GroupId == 0)
             {
-                if (EditComment(dto, CommentId))
+                if (EditComment(dto, (int)CommentId))
                     return RedirectToAction("Index");
-                return View();
+                return RedirectToAction("Index");
             }
 
             var svc = GetCommentService();
