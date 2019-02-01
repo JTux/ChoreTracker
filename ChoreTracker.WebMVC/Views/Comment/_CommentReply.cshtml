@@ -1,0 +1,63 @@
+﻿@model ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO
+
+@{
+    ViewBag.CommentModal = $"Comment{Model.ParentId}";
+    ViewBag.CommentBtn = $"Commentbtn{Model.ParentId}";
+}
+
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button id="@Html.Raw(ViewBag.CommentBtn)" type="button" class="btn btn-sm btn-default pull-left button button4">
+                        Reply
+                    </button>
+
+                    <div class="modal fade" tabindex="-1" id="@Html.Raw(ViewBag.CommentModal)" data-keyboard="true" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Login</h4>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model => model.GroupId)
+
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.ParentId, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Post" class="btn btn-default" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(@Html.Raw(ViewBag.CommentBtn)).click(function () {
+            $(@Html.Raw(ViewBag.CommentModal)).modal('show');
+        });
+    });
+</script>

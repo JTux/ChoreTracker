@@ -3,6 +3,7 @@ using ChoreTracker.Services.DataContract.Comment;
 using ChoreTracker.Services.DataContract.Group;
 using ChoreTracker.WebMVC.DataContract.Comment;
 using ChoreTracker.WebMVC.DataContract.Group;
+using ChoreTracker.WebMVC.Models.CommentModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Web.Mvc;

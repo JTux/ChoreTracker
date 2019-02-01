@@ -47,7 +47,7 @@ namespace ChoreTracker.Services
                         OwnerId = c.OwnerId,
                         CommentId = c.CommentId,
                         Content = c.Content,
-                        ParentId = c.ParentId
+                        GroupId = groupId
                     });
 
                 return query.ToList();

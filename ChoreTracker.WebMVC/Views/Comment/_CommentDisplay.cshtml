@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
-@model ChoreTracker.WebMVC.DataContract.Comment.CommentListItemDTO
+@using ChoreTracker.WebMVC.DataContract.Comment
+@model CommentListItemDTO
 
 <div class="user-comment">
     <h6 class="comment-poster">
@@ -14,4 +15,10 @@
         @Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
     }
     @Html.ActionLink("Reply", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
+</div>
+@{
+    var comment = new CommentCreateDTO { ParentId = Model.CommentId, GroupId = Model.GroupId };
+}
+<div class="comment-button">
+    @Html.Partial("~/Views/Comment/_CommentReply.cshtml", comment)
 </div>

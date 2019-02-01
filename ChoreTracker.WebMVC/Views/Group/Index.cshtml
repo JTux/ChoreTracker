@@ -83,7 +83,8 @@
                 CommentId = c.CommentId,
                 ParentId = c.ParentId,
                 Poster = c.Poster,
-                OwnerId = c.OwnerId
+                OwnerId = c.OwnerId,
+                GroupId = c.GroupId
             };
 
             <tr class="comment-row">
@@ -95,4 +96,4 @@
     </table>
 }
 
-@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO { ParentId = 1, GroupId = Model.GroupId })
+@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO { GroupId = Model.GroupId })

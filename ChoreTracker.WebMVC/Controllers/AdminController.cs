@@ -35,7 +35,16 @@ namespace ChoreTracker.WebMVC.Controllers
 
             return View(users);
         }
+        public ActionResult ModalPopUp()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult ModalPopUp(int i)
+        {
+            return RedirectToAction("Index");
+        }
         //-- Allows Admins to create another Admin Account
         public ActionResult AdminCreate()
         {
