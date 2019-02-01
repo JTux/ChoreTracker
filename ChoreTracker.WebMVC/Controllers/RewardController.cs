@@ -27,6 +27,11 @@ namespace ChoreTracker.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(RewardCreateDTO dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+
             var svc = CreateRewardService();
             var rao = new RewardCreateRAO
             {

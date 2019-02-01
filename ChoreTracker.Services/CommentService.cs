@@ -18,6 +18,11 @@ namespace ChoreTracker.Services
 
         public bool CreateComment(CommentCreateRAO model)
         {
+            if(model.Content == null)
+            {
+                return false;
+            }
+
             var comment = new CommentEntity
             {
                 OwnerId = _userId,
@@ -47,7 +52,7 @@ namespace ChoreTracker.Services
                         OwnerId = c.OwnerId,
                         CommentId = c.CommentId,
                         Content = c.Content,
-                        ParentId = c.ParentId
+                        GroupId = groupId
                     });
 
                 return query.ToList();
@@ -66,6 +71,21 @@ namespace ChoreTracker.Services
                     Content = comment.Content,
                     Poster = ctx.Users.FirstOrDefault(u => u.Id == comment.OwnerId.ToString()).UserName
                 };
+            }
+        }
+
+        public bool EditComment(CommentEditRAO rao)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Comments
+                        .Single(c => c.CommentId == rao.CommentId && c.OwnerId == _userId);
+
+                entity.Content = rao.Content;
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

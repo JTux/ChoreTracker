@@ -174,13 +174,12 @@
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CommentModels\CommentReplyModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -285,8 +284,6 @@
     <Content Include="Views\Admin\RoleIndex.cshtml" />
     <Content Include="Views\Admin\UserIndex.cshtml" />
     <Content Include="Views\Admin\AdminCreate.cshtml" />
-    <Content Include="Views\Owner\Index.cshtml" />
-    <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\JoinGroup.cshtml" />
@@ -295,6 +292,8 @@
     <Content Include="Views\Comment\_CommentCreate.cshtml" />
     <Content Include="Views\Comment\_CommentDisplay.cshtml" />
     <Content Include="Views\Group\ModalPopUp.cshtml" />
+    <Content Include="Views\Comment\_CommentReply.cshtml" />
+    <Content Include="Views\Comment\_CommentEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

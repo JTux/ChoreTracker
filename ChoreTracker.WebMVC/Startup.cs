@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using ChoreTracker.Data;
+using ChoreTracker.Services;
+using ChoreTracker.Services.DataContract.Group;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -14,6 +17,20 @@ namespace ChoreTracker.WebMVC
         {
             ConfigureAuth(app);
             CreateRolesAndUsers();
+            CreateAdminGroup();
+        }
+
+        private void CreateAdminGroup()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                if (ctx.Groups.Where(g => g.GroupName == "Admins").Count() == 0)
+                {
+                    var adminGuid = Guid.Parse(ctx.Users.FirstOrDefault(u => u.Email == "admin@admin.com").Id);
+                    var groupService = new GroupService(adminGuid);
+                    groupService.CreateGroup(new GroupCreateRAO { GroupName = "Admins" });
+                }
+            }
         }
 
         private void CreateRolesAndUsers()
@@ -29,7 +46,7 @@ namespace ChoreTracker.WebMVC
                 roleManager.Create(role);
 
                 var user = new ApplicationUser();
-                user.UserName = "admin";
+                user.UserName = "Admin";
                 user.Email = "admin@admin.com";
                 user.FirstName = "Mr";
                 user.LastName = "Admin";

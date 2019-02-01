@@ -44,6 +44,7 @@
     <Compile Include="Admin\AdminUserCreateRAO.cs" />
     <Compile Include="Comment\CommentCreateRAO.cs" />
     <Compile Include="Comment\CommentDetailRAO.cs" />
+    <Compile Include="Comment\CommentEditRAO.cs" />
     <Compile Include="Comment\CommentListItemRAO.cs" />
     <Compile Include="Group\GroupCreateRAO.cs" />
     <Compile Include="Group\GroupDetailRAO.cs" />

@@ -17,19 +17,21 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
-}
+}*/
 
 .comment-table {
+    width: 100%;
 }
 
 .comment-row {
+    width: 100%;
 }
 
 .comment-cell {
-    max-width: 500px;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;

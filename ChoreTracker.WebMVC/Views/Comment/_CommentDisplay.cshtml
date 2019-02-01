@@ -1,5 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
-@model ChoreTracker.WebMVC.DataContract.Comment.CommentListItemDTO
+@using ChoreTracker.WebMVC.DataContract.Comment
+@model CommentListItemDTO
+
+@{
+    var parentContent = ViewData["parent"];
+    var parentCommenter = ViewData["parentCommenter"];
+}
 
 <div class="user-comment">
     <h6 class="comment-poster">
@@ -10,8 +16,23 @@
 <div class="comment-option">
     @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()))
     {
-        @Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
-        @Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
+        @Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.CommentId }, new { @class = "btn btn-default comment-button" })
+        @Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "btn btn-default comment-button" })
     }
-    @Html.ActionLink("Reply", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "comment-button" })
+
+    @{
+        var commentCreate = new CommentCreateDTO { ParentId = Model.CommentId, GroupId = Model.GroupId };
+        var commentEdit = new CommentEditDTO { CommentId = Model.CommentId, Content = Model.Content };
+    }
+
+    @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()))
+    {
+        <div class="comment-button">
+            @Html.Partial("~/Views/Comment/_CommentEdit.cshtml", commentEdit)
+        </div>
+    }
+    <div class="comment-button">
+        @Html.Partial("~/Views/Comment/_CommentReply.cshtml", commentCreate, new ViewDataDictionary { { "parentContent", parentContent }, { "parentCommenter", parentCommenter } })
+    </div>
 </div>
+
