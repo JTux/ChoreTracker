@@ -293,6 +293,7 @@
     <Content Include="Views\Comment\_CommentDisplay.cshtml" />
     <Content Include="Views\Group\ModalPopUp.cshtml" />
     <Content Include="Views\Comment\_CommentReply.cshtml" />
+    <Content Include="Views\Comment\_CommentEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

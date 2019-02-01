@@ -77,6 +77,7 @@
         </tr>
         @foreach (var c in ViewBag.Comments)
         {
+            var parentContent = c.Content;
             var comment = new ChoreTracker.WebMVC.DataContract.Comment.CommentListItemDTO
             {
                 Content = c.Content,
@@ -87,9 +88,10 @@
                 GroupId = c.GroupId
             };
 
+
             <tr class="comment-row">
                 <td class="comment-cell">
-                    @Html.Partial("~/Views/Comment/_CommentDisplay.cshtml", comment)
+                    @Html.Partial("~/Views/Comment/_CommentDisplay.cshtml", comment, new ViewDataDictionary { { "parent", parentContent }, { "parentCommenter", c.Poster } })
                 </td>
             </tr>
         }

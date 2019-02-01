@@ -45,6 +45,7 @@
     <Compile Include="Admin\AdminUserCreateDTO.cs" />
     <Compile Include="Comment\CommentCreateDTO.cs" />
     <Compile Include="Comment\CommentDetailDTO.cs" />
+    <Compile Include="Comment\CommentEditDTO.cs" />
     <Compile Include="Comment\CommentListItemDTO.cs" />
     <Compile Include="Group\GroupCreateDTO.cs" />
     <Compile Include="Group\GroupDetailDTO.cs" />
