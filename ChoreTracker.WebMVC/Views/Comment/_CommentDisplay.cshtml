@@ -5,19 +5,27 @@
 @{
     var parentContent = ViewData["parent"];
     var parentCommenter = ViewData["parentCommenter"];
+
+    if (Model.ParentId == 0)
+    {
+        ViewData["commentMargin"] = "parent-comment";
+    }
+    else
+    {
+        ViewData["commentMargin"] = "child-comment";
+    }
 }
 
-<div class="user-comment">
+<div class="user-comment @Html.Raw(ViewData["commentMargin"])">
     <h6 class="comment-poster">
-        @Model.Poster:
+        @Model.Poster: @Model.CommentId
     </h6>
     @Html.DisplayFor(Model => Model.Content)
 </div>
 <div class="comment-option">
-    @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()))
+    @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()) || User.IsInRole("Admin"))
     {
         @Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.CommentId }, new { @class = "btn btn-default comment-button" })
-        @Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.CommentId }, new { @class = "btn btn-default comment-button" })
     }
 
     @{

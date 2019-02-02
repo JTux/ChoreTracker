@@ -18,7 +18,7 @@ namespace ChoreTracker.Services
 
         public bool CreateComment(CommentCreateRAO model)
         {
-            if(model.Content == null)
+            if (model.Content == null)
             {
                 return false;
             }
@@ -42,7 +42,7 @@ namespace ChoreTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx
+                var groupComments = ctx
                     .Comments
                     .Where(c => c.GroupId == groupId)
                     .Select(c =>
@@ -52,10 +52,35 @@ namespace ChoreTracker.Services
                         OwnerId = c.OwnerId,
                         CommentId = c.CommentId,
                         Content = c.Content,
-                        GroupId = groupId
-                    });
+                        GroupId = c.GroupId,
+                        ParentId = c.ParentId
+                    }).ToList();
 
-                return query.ToList();
+                var sortedList = new List<CommentListItemDTO>();
+                var orderedList = groupComments.OrderBy(c => c.ParentId).ToList();
+
+                foreach (var comment in orderedList)
+                {
+                    if (!sortedList.Contains(comment))
+                    {
+                        if (comment.ParentId == 0)
+                            sortedList.Add(comment);
+                        else
+                        {
+                            var lastSibling = sortedList.LastOrDefault(e => e.ParentId == comment.ParentId);
+
+                            if (lastSibling == null)
+                            {
+                                var parentIndex = sortedList.IndexOf(sortedList.Find(c => c.CommentId == comment.ParentId));
+                                sortedList.Insert((parentIndex + 1), comment);
+                            }
+                            else
+                                sortedList.Insert((sortedList.IndexOf(lastSibling) + 1), comment);
+                        }
+                    }
+                }
+
+                return sortedList;
             }
         }
 

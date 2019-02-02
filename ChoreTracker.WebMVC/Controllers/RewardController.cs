@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ChoreTracker.WebMVC.Controllers
 {
-    [Authorize(Roles = "Admin,GroupOwner")]
+    [Authorize(Roles = "Admin,GroupOwner,GroupMember")]
     public class RewardController : Controller
     {
         // GET: Reward
