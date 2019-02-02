@@ -1,6 +1,6 @@
 ﻿@model ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Comment",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

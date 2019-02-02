@@ -35,45 +35,6 @@ namespace ChoreTracker.WebMVC.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(CommentCreateDTO dto, int? CommentId)
-        {
-            if(dto.GroupId == 0)
-            {
-                if (EditComment(dto, (int)CommentId))
-                    return RedirectToAction("Index");
-                return RedirectToAction("Index");
-            }
-
-            var svc = GetCommentService();
-
-            var rao = new CommentCreateRAO
-            {
-                Content = dto.Content,
-                GroupId = dto.GroupId,
-                ParentId = dto.ParentId
-            };
-
-            if (svc.CreateComment(rao))
-            {
-                return RedirectToAction("Index");
-            }
-            return RedirectToAction("Index");
-        }
-
-        private bool EditComment(CommentCreateDTO dto, int id)
-        {
-            var svc = GetCommentService();
-            var rao = new CommentEditRAO
-            {
-                CommentId = id,
-                Content = dto.Content
-            };
-            if (svc.EditComment(rao)) return true;
-            else return false;
-        }
-
         // GET: Group/Create
         public ActionResult Create()
         {

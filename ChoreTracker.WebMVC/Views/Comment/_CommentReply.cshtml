@@ -26,7 +26,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @using (Html.BeginForm())
+                                    @using (Html.BeginForm("Create","Comment", FormMethod.Post))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.HiddenFor(model => model.GroupId)
