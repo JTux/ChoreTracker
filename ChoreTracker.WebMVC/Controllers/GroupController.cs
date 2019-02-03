@@ -17,7 +17,6 @@ namespace ChoreTracker.WebMVC.Controllers
         public ActionResult Index()
         {
             var svc = GetGroupService();
-            var commentService = GetCommentService();
             if (!svc.CheckForExistingGroup())
             {
                 if (User.IsInRole("GroupOwner"))
@@ -27,6 +26,7 @@ namespace ChoreTracker.WebMVC.Controllers
                     return RedirectToAction("JoinGroup");
             }
 
+            var commentService = GetCommentService();
             var model = svc.GetGroupInfo();
             ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
             ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
@@ -78,17 +78,6 @@ namespace ChoreTracker.WebMVC.Controllers
                 return RedirectToAction("Index");
 
             return View();
-        }
-
-        public ActionResult ModalPopUp()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult ModalPopUp(int i)
-        {
-            return RedirectToAction("Index");
         }
 
         [HttpPost]

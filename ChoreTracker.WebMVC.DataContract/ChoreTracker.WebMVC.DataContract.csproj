@@ -52,6 +52,7 @@
     <Compile Include="Group\GroupJoinDTO.cs" />
     <Compile Include="Group\GroupMemberDetailDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reward\RewardClaimDTO.cs" />
     <Compile Include="Reward\RewardCreateDTO.cs" />
     <Compile Include="Reward\RewardDetailDTO.cs" />
     <Compile Include="Reward\RewardEditDTO.cs" />

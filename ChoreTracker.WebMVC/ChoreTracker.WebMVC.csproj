@@ -296,6 +296,7 @@
     <Content Include="Views\Comment\_CommentReply.cshtml" />
     <Content Include="Views\Comment\_CommentEdit.cshtml" />
     <Content Include="Views\Comment\_CommentDelete.cshtml" />
+    <Content Include="Views\Reward\_RewardClaim.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

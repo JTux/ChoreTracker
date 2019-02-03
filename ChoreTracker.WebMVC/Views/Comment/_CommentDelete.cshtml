@@ -48,11 +48,9 @@
         </div>
     </fieldset>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-
 <script type="text/javascript">
-
     $(document).ready(function () {
         $(@Html.Raw(ViewBag.CommentBtn)).click(function () {
             $(@Html.Raw(ViewBag.CommentModal)).modal('show');

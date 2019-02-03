@@ -1,10 +1,8 @@
-﻿@model ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO
+﻿@model ChoreTracker.WebMVC.DataContract.Reward.RewardClaimDTO
 
 @{
-    ViewBag.CommentModal = $"Comment{Model.ParentId}";
-    ViewBag.CommentBtn = $"Commentbtn{Model.ParentId}";
-    var parentContent = ViewData["parentContent"];
-    var parentCommenter = ViewData["parentCommenter"];
+    ViewBag.RewardModal = $"Reward{Model.RewardId}";
+    ViewBag.RewardBtn = $"Rewardbtn{Model.RewardId}";
 }
 
 <div>
@@ -12,35 +10,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <button id="@Html.Raw(ViewBag.CommentBtn)" type="button" class="btn btn-sm btn-default pull-left button button4">
-                        Reply
+                    <button id="@Html.Raw(ViewBag.RewardBtn)" type="button" class="btn btn-sm btn-default pull-left button button4">
+                        Claim
                     </button>
 
-                    <div class="modal fade" tabindex="-1" id="@Html.Raw(ViewBag.CommentModal)" data-keyboard="true" data-backdrop="static">
+                    <div class="modal fade" tabindex="-1" id="@Html.Raw(ViewBag.RewardModal)" data-keyboard="true" data-backdrop="static">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4>Replying to @Html.Raw(parentCommenter)</h4>
+                                    <h4>@Html.Raw(Model.RewardName)</h4>
                                     <button type="button" class="close" data-dismiss="modal">
                                         ×
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @using (Html.BeginForm("Create","Comment", FormMethod.Post))
+                                    @using (Html.BeginForm("Claim", "Reward", FormMethod.Post))
                                     {
                                         @Html.AntiForgeryToken()
-                                        @Html.HiddenFor(model => model.GroupId)
-                                        @Html.HiddenFor(model => model.ParentId)
+                                        @Html.HiddenFor(model => model.RewardId)
+                                        @Html.HiddenFor(model => model.RewardName)
+                                        @Html.HiddenFor(model => model.RewardDescription)
+                                        @Html.HiddenFor(model => model.RewardCost)
 
-                                        <p>
-                                            @Html.Raw(parentCommenter) said: @Html.Raw(parentContent)
-                                        </p>
                                         <div class="form-group">
-                                            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.ClaimedCount, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="form-group">
                                             <div style="text-align: right;">
-                                                <input type="submit" value="Reply" class="btn btn-default"/>
+                                                <input type="submit" value="Reply" class="btn btn-default" />
                                             </div>
                                         </div>
                                     }
@@ -57,8 +54,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(@Html.Raw(ViewBag.CommentBtn)).click(function () {
-            $(@Html.Raw(ViewBag.CommentModal)).modal('show');
+        $(@Html.Raw(ViewBag.RewardBtn)).click(function () {
+            $(@Html.Raw(ViewBag.RewardModal)).modal('show');
         });
     });
 </script>

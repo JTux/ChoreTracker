@@ -58,7 +58,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        public bool ClaimReward()
+        public bool ClaimReward(RewardClaimRAO rao)
         {
             return true;
         }
