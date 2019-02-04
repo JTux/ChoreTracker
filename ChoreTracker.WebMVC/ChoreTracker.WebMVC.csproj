@@ -297,6 +297,7 @@
     <Content Include="Views\Comment\_CommentEdit.cshtml" />
     <Content Include="Views\Comment\_CommentDelete.cshtml" />
     <Content Include="Views\Reward\_RewardClaim.cshtml" />
+    <Content Include="Views\Shared\_ModalView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

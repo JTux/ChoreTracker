@@ -1,0 +1,68 @@
+﻿@{
+    var model = ViewData["model"];
+    var modelId = ViewData["ModelId"];
+    var varType = ViewData["typeOfObject"];
+    var buttonText = ViewData["buttonText"];
+    var headerText = ViewData["headerText"];
+    var confirmation = ViewData["confirmation"];
+
+    var propertyList = (List<object>)ViewData["propertyList"];
+    var hiddenPropList = (List<object>)ViewData["hiddenPropList"];
+
+    string varActionName = ViewData["actionName"].ToString();
+    string varControllername = ViewData["controllerName"].ToString();
+
+    ViewBag.varModal = $"{varType}{modelId}";
+    ViewBag.varBtn = $"{varType}Btn{modelId}";
+}
+
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button id="@Html.Raw(ViewBag.varBtn)" type="button" class="btn btn-sm btn-default pull-left button button4">
+                        @Html.Raw(buttonText)
+                    </button>
+
+                    <div class="modal fade" tabindex="-1" id="@Html.Raw(ViewBag.varModal)" data-keyboard="true" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4>@Html.Raw(headerText)</h4>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @using (Html.BeginForm(varActionName, varControllername, FormMethod.Post))
+                                    {
+                                        
+                                        foreach (var prop in propertyList)
+                                        {
+                                        }
+
+                                        <div class="form-group">
+                                            <div style="text-align: right;">
+                                                <input type="submit" value="@Html.Raw(confirmation)" class="btn btn-default" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(@Html.Raw(ViewBag.varBtn)).click(function () {
+            $(@Html.Raw(ViewBag.varModal)).modal('show');
+        });
+    });
+</script>
