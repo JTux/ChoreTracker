@@ -84,6 +84,48 @@ namespace ChoreTracker.Services
             }
         }
 
+        public bool DeleteComment(CommentDetailRAO rao)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var comment = ctx.Comments.FirstOrDefault(c => c.CommentId == rao.CommentId);
+                var children = ctx.Comments.Where(c => c.ParentId == rao.CommentId).ToList();
+
+                var deletThis = new HashSet<CommentEntity> { comment };
+
+                foreach (var c in children)
+                    deletThis.Add(c);
+
+                int count = 0;
+                var nextGen = new List<CommentEntity>();
+
+                do
+                {
+                    nextGen = new List<CommentEntity>();
+                    count = deletThis.Count;
+
+                    foreach (var c in deletThis)
+                    {
+                        var newComments = ctx.Comments.Where(nG => nG.ParentId == c.CommentId).ToList();
+                        foreach (var newCom in newComments)
+                        {
+                            if (deletThis.Contains(newCom))
+                                continue;
+                            nextGen.Add(newCom);
+                        }
+                    }
+                    foreach (var c in nextGen)
+                        deletThis.Add(c);
+                }
+                while (deletThis.Count > count);
+
+                foreach (var c in deletThis)
+                    ctx.Comments.Remove(c);
+
+                return ctx.SaveChanges() == deletThis.Count;
+            }
+        }
+
         public CommentDetailDTO GetCommentById(int id)
         {
             using (var ctx = new ApplicationDbContext())

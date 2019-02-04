@@ -17,7 +17,6 @@ namespace ChoreTracker.WebMVC.Controllers
         public ActionResult Index()
         {
             var svc = GetGroupService();
-            var commentService = GetCommentService();
             if (!svc.CheckForExistingGroup())
             {
                 if (User.IsInRole("GroupOwner"))
@@ -27,51 +26,13 @@ namespace ChoreTracker.WebMVC.Controllers
                     return RedirectToAction("JoinGroup");
             }
 
+            var commentService = GetCommentService();
             var model = svc.GetGroupInfo();
             ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
             ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
             ViewBag.Comments = commentService.GetGroupComments(model.GroupId);
 
             return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(CommentCreateDTO dto, int? CommentId)
-        {
-            if(dto.GroupId == 0)
-            {
-                if (EditComment(dto, (int)CommentId))
-                    return RedirectToAction("Index");
-                return RedirectToAction("Index");
-            }
-
-            var svc = GetCommentService();
-
-            var rao = new CommentCreateRAO
-            {
-                Content = dto.Content,
-                GroupId = dto.GroupId,
-                ParentId = dto.ParentId
-            };
-
-            if (svc.CreateComment(rao))
-            {
-                return RedirectToAction("Index");
-            }
-            return RedirectToAction("Index");
-        }
-
-        private bool EditComment(CommentCreateDTO dto, int id)
-        {
-            var svc = GetCommentService();
-            var rao = new CommentEditRAO
-            {
-                CommentId = id,
-                Content = dto.Content
-            };
-            if (svc.EditComment(rao)) return true;
-            else return false;
         }
 
         // GET: Group/Create
@@ -117,17 +78,6 @@ namespace ChoreTracker.WebMVC.Controllers
                 return RedirectToAction("Index");
 
             return View();
-        }
-
-        public ActionResult ModalPopUp()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult ModalPopUp(int i)
-        {
-            return RedirectToAction("Index");
         }
 
         [HttpPost]

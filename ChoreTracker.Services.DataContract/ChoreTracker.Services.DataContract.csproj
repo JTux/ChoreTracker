@@ -51,7 +51,10 @@
     <Compile Include="Group\GroupJoinRAO.cs" />
     <Compile Include="Group\GroupMemberDetailRAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reward\RewardClaimRAO.cs" />
     <Compile Include="Reward\RewardCreateRAO.cs" />
+    <Compile Include="Reward\RewardDetailRAO.cs" />
+    <Compile Include="Reward\RewardEditRAO.cs" />
     <Compile Include="Reward\RewardListItemRAO.cs" />
   </ItemGroup>
   <ItemGroup />

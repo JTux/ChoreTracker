@@ -48,6 +48,25 @@ namespace ChoreTracker.WebMVC.Controllers
             return View(dto);
         }
 
+        public ActionResult Claim()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Claim(RewardClaimDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var rao = new RewardClaimRAO { RewardId = dto.RewardId, ClaimedCount = dto.ClaimedCount };
+
+            var svc = CreateRewardService();
+
+            if (svc.ClaimReward(rao)) return RedirectToAction("Index", "Group");
+            return RedirectToAction("Index", "Group");
+        }
+
         private RewardService CreateRewardService() => new RewardService(Guid.Parse(User.Identity.GetUserId()));
     }
 }

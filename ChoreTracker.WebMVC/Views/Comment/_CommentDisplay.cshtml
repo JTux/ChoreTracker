@@ -23,16 +23,18 @@
     @Html.DisplayFor(Model => Model.Content)
 </div>
 <div class="comment-option">
-    @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()) || User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.CommentId }, new { @class = "btn btn-default comment-button" })
-    }
-
     @{
         var commentCreate = new CommentCreateDTO { ParentId = Model.CommentId, GroupId = Model.GroupId };
         var commentEdit = new CommentEditDTO { CommentId = Model.CommentId, Content = Model.Content };
+        var commentDelete = new CommentDetailDTO { CommentId = Model.CommentId, Content = Model.Content, Poster = Model.Poster };
     }
 
+    @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()) || User.IsInRole("Admin") || User.IsInRole("GroupOwner"))
+    {
+        <div class="comment-button">
+            @Html.Partial("~/Views/Comment/_CommentDelete.cshtml", commentDelete)
+        </div>
+    }
     @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()))
     {
         <div class="comment-button">
