@@ -60,7 +60,28 @@ namespace ChoreTracker.Services
 
         public bool ClaimReward(RewardClaimRAO rao)
         {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var user = ctx.Users.Single(u => u.Id == _userId.ToString());
+                var entity = ctx.Rewards.Single(r => r.RewardId == rao.RewardId);
+                
+            }
             return true;
+        }
+
+        public RewardDetailDTO GetRewardById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Rewards.Single(r => r.RewardId == id);
+                return new RewardDetailDTO
+                {
+                    RewardId = entity.RewardId,
+                    RewardCost = entity.Cost,
+                    RewardName = entity.RewardName,
+                    RewardDescription = entity.Description
+                };
+            }
         }
     }
 }

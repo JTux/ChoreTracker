@@ -6,6 +6,7 @@ using ChoreTracker.WebMVC.DataContract.Group;
 using ChoreTracker.WebMVC.Models.CommentModels;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ChoreTracker.WebMVC.Controllers
@@ -25,6 +26,10 @@ namespace ChoreTracker.WebMVC.Controllers
                 if (User.IsInRole("GroupMember"))
                     return RedirectToAction("JoinGroup");
             }
+            else if (svc.IsApplicant())
+            {
+                return RedirectToAction("MyGroups");
+            }
 
             var commentService = GetCommentService();
             var model = svc.GetGroupInfo();
@@ -32,6 +37,14 @@ namespace ChoreTracker.WebMVC.Controllers
             ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
             ViewBag.Comments = commentService.GetGroupComments(model.GroupId);
 
+            return View(model);
+        }
+
+        // GET: Group/MyGroups
+        public ActionResult MyGroups()
+        {
+            var svc = GetGroupService();
+            var model = svc.GetMyGroups();
             return View(model);
         }
 
@@ -72,10 +85,10 @@ namespace ChoreTracker.WebMVC.Controllers
 
         public ActionResult JoinGroup()
         {
-            var svc = GetGroupService();
+            //var svc = GetGroupService();
 
-            if (svc.CheckForExistingGroup())
-                return RedirectToAction("Index");
+            //if (svc.CheckForExistingGroup())
+            //    return RedirectToAction("Index");
 
             return View();
         }

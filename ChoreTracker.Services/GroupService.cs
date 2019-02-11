@@ -46,6 +46,27 @@ namespace ChoreTracker.Services
             }
         }
 
+        public bool IsApplicant()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                return ctx.GroupMembers.First().InGroup;
+            }
+        }
+
+        public IEnumerable<GroupListItemDTO> GetMyGroups()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var groupMemberList = ctx.GroupMembers.Where(gm => gm.MemberId == _userId).Select(m => new GroupListItemDTO
+                {
+                    GroupName = m.Group.GroupName,
+                    InGroup = m.InGroup
+                });
+                return groupMemberList.ToArray();
+            }
+        }
+
         public List<GroupMemberDetailDTO> GetApplicants(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -90,7 +111,7 @@ namespace ChoreTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                if (ctx.Groups.Where(g => g.OwnerId == _userId).Count() != 0 || ctx.GroupMembers.Where(gm => gm.MemberId == _userId).Count() != 0)
+                if (ctx.Groups.Where(g => g.OwnerId == _userId).Count() != 0 || ctx.GroupMembers.Where(gm => gm.MemberId == _userId && gm.InGroup).Count() != 0)
                     return true;
 
                 return false;
@@ -161,7 +182,7 @@ namespace ChoreTracker.Services
                 {
                     MemberId = _userId,
                     GroupId = group.GroupId,
-                    InGroup = true
+                    InGroup = false
                 };
 
                 ctx.GroupMembers.Add(groupMember);

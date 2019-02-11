@@ -48,23 +48,26 @@ namespace ChoreTracker.WebMVC.Controllers
             return View(dto);
         }
 
-        public ActionResult Claim()
-        {
-            return View();
-        }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Claim(RewardClaimDTO dto)
         {
             if (!ModelState.IsValid)
                 return View();
 
-            var rao = new RewardClaimRAO { RewardId = dto.RewardId, ClaimedCount = dto.ClaimedCount };
+            var rao = new RewardClaimRAO { RewardId = dto.RewardId, ClaimedCount = dto.ClaimedCount, RewardCost = dto.RewardCost };
 
             var svc = CreateRewardService();
 
             if (svc.ClaimReward(rao)) return RedirectToAction("Index", "Group");
             return RedirectToAction("Index", "Group");
+        }
+
+        public ActionResult Details(int id)
+        {
+            var svc = CreateRewardService();
+            var dto = svc.GetRewardById(id);
+            return View(dto);
         }
 
         private RewardService CreateRewardService() => new RewardService(Guid.Parse(User.Identity.GetUserId()));
