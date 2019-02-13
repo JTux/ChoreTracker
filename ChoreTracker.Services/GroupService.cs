@@ -18,17 +18,15 @@ namespace ChoreTracker.Services
             _userId = userId;
         }
 
-        public GroupDetailDTO GetGroupInfo()
+        public GroupDetailDTO GetGroupInfo(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 GroupEntity group;
-                var groupMember = ctx.GroupMembers.FirstOrDefault(g => g.MemberId == _userId);
+                var groupMember = ctx.GroupMembers.FirstOrDefault(g => g.MemberId == _userId && g.GroupId == id);
 
-                if (groupMember == null)
-                    group = ctx.Groups.FirstOrDefault(g => g.OwnerId == _userId);
-                else
-                    group = groupMember.Group;
+                if (groupMember == null) group = ctx.Groups.FirstOrDefault(g => g.GroupId == groupMember.GroupId);
+                else group = groupMember.Group;
 
                 if (group != null)
                 {
@@ -46,11 +44,14 @@ namespace ChoreTracker.Services
             }
         }
 
-        public bool IsApplicant()
+        public bool IsApplicant(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                return ctx.GroupMembers.First().InGroup;
+                if (ctx.GroupMembers.FirstOrDefault(m => m.GroupId == id && m.MemberId == _userId).InGroup)
+                    return false;
+                else
+                    return true;
             }
         }
 
@@ -61,7 +62,8 @@ namespace ChoreTracker.Services
                 var groupMemberList = ctx.GroupMembers.Where(gm => gm.MemberId == _userId).Select(m => new GroupListItemDTO
                 {
                     GroupName = m.Group.GroupName,
-                    InGroup = m.InGroup
+                    InGroup = m.InGroup,
+                    GroupId = m.GroupId
                 });
                 return groupMemberList.ToArray();
             }
@@ -79,7 +81,8 @@ namespace ChoreTracker.Services
                     var member = ctx.Users.Single(u => u.Id == gm.MemberId.ToString());
                     members.Add(new GroupMemberDetailDTO
                     {
-                        UserName = member.UserName
+                        UserName = member.UserName,
+                        MemberId = gm.GroupMemberId
                     });
                 }
 
@@ -107,13 +110,30 @@ namespace ChoreTracker.Services
             }
         }
 
-        public bool CheckForExistingGroup()
+        public bool Acceptance(GroupAcceptanceRAO rao)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                if (ctx.Groups.Where(g => g.OwnerId == _userId).Count() != 0 || ctx.GroupMembers.Where(gm => gm.MemberId == _userId && gm.InGroup).Count() != 0)
-                    return true;
+                var entity = ctx.GroupMembers.Single(gm => gm.GroupMemberId == rao.GroupMemberId);
 
+                if (rao.Accepted)
+                {
+                    entity.InGroup = true;
+                    return ctx.SaveChanges() == 1;
+                }
+
+                ctx.GroupMembers.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool CheckForExistingGroup(int groupId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var groupMember = ctx.GroupMembers.FirstOrDefault(m => m.GroupId == groupId && m.MemberId == _userId);
+                if (groupMember != null)
+                    return true;
                 return false;
             }
         }
@@ -129,11 +149,22 @@ namespace ChoreTracker.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-                if (ctx.Groups.Where(g => g.OwnerId == _userId).Count() != 0)
-                    return true;
-
                 ctx.Groups.Add(newGroup);
 
+                if (ctx.SaveChanges() != 1)
+                    return false;
+
+                var groups = ctx.Groups.Where(g => g.OwnerId == newGroup.OwnerId).ToList();
+                var id = groups[(groups.Count() - 1)].GroupId;
+
+                var groupMember = new GroupMember
+                {
+                    MemberId = _userId,
+                    GroupId = id,
+                    InGroup = true
+                };
+
+                ctx.GroupMembers.Add(groupMember);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -187,6 +218,24 @@ namespace ChoreTracker.Services
 
                 ctx.GroupMembers.Add(groupMember);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public int GetGroupIDByName(string groupName)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var group = ctx.Groups.Single(g => g.GroupName == groupName && g.OwnerId == _userId);
+                return group.GroupId;
+            }
+        }
+
+        public int GetGroupIDByKey(string inviteKey)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var group = ctx.Groups.Single(g => g.GroupInviteKey == inviteKey);
+                return group.GroupId;
             }
         }
     }

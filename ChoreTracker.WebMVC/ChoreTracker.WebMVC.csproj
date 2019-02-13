@@ -287,7 +287,7 @@
     <Content Include="Views\Admin\AdminCreate.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
-    <Content Include="Views\Group\JoinGroup.cshtml" />
+    <Content Include="Views\Group\Join.cshtml" />
     <Content Include="Views\Reward\Create.cshtml" />
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Comment\_CommentCreate.cshtml" />

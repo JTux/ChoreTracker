@@ -26,7 +26,9 @@
         <td>
             @Html.DisplayFor(model => model.GroupInviteKey)
         </td>
-        <td></td>
+        <td>
+            @Html.ActionLink("Rewards", "Index", "Reward", new { id = Model.GroupId }, null)
+        </td>
     </tr>
 </table>
 @if (ViewBag.GroupMembers != null && ViewBag.GroupMembers.Count != 0)
@@ -62,7 +64,10 @@
             <tr>
                 <td>@gm.UserName</td>
                 <td>@gm.RewardPoints</td>
-                <td></td>
+                <td>
+                    @Html.ActionLink("Accept", "Acceptance", "Group", new { id = gm.MemberId, groupId = Model.GroupId, accepted = true }, null) |
+                    @Html.ActionLink("Deny", "Acceptance", "Group", new { id = gm.MemberId, groupId = Model.GroupId, accepted = false }, null)
+                </td>
             </tr>
         }
     </table>

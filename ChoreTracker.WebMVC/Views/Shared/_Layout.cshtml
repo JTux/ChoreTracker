@@ -23,7 +23,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">@Html.ActionLink("Group Info", "MyGroups", "Group", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("Rewards", "Index", "Reward", null, new { @class = "nav-link" })</li>
+                        @*<li class="nav-item">@Html.ActionLink("Rewards", "Index", "Reward", null, new { @class = "nav-link" })</li>*@
                     }
 
                     @if (User.IsInRole("Admin"))

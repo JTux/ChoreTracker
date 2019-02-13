@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChoreTracker.WebMVC.DataContract.Group
+namespace ChoreTracker.Services.DataContract.Group
 {
-    public class GroupListItemDTO
+    public class GroupAcceptanceRAO
     {
+        public int GroupMemberId { get; set; }
         public int GroupId { get; set; }
-        public string GroupName { get; set; }
-        public bool InGroup { get; set; }
+        public bool Accepted { get; set; }
     }
 }

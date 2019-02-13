@@ -7,14 +7,14 @@ using System.Web.Mvc;
 
 namespace ChoreTracker.WebMVC.Controllers
 {
-    [Authorize(Roles = "Admin,GroupOwner,GroupMember")]
+    [Authorize(Roles = "Admin,User")]
     public class RewardController : Controller
     {
         // GET: Reward
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             var svc = CreateRewardService();
-            var model = svc.GetRewards();
+            var model = svc.GetRewards(id);
             return View(model);
         }
 

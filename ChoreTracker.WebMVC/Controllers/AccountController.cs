@@ -172,11 +172,11 @@ namespace ChoreTracker.WebMVC.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    if (model.UserRole.ToString() == "GroupOwner")
-                        return RedirectToAction("Create", "Group");
+                    if (model.UserRole.ToString() == "User")
+                        return RedirectToAction("MyGroups", "Group");
 
-                    if (model.UserRole.ToString() == "GroupMember")
-                        return RedirectToAction("JoinGroup", "Group");
+                    //if (model.UserRole.ToString() == "PremiumUser")
+                    //    return RedirectToAction("JoinGroup", "Group");
 
                     return RedirectToAction("Index", "Home");
                 }
