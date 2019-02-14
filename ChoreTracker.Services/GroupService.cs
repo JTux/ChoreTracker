@@ -157,7 +157,7 @@ namespace ChoreTracker.Services
                 var groups = ctx.Groups.Where(g => g.OwnerId == newGroup.OwnerId).ToList();
                 var id = groups[(groups.Count() - 1)].GroupId;
 
-                var groupMember = new GroupMember
+                var groupMember = new GroupMemberEntity
                 {
                     MemberId = _userId,
                     GroupId = id,
@@ -209,7 +209,7 @@ namespace ChoreTracker.Services
                 if (group == null)
                     return false;
 
-                var groupMember = new GroupMember
+                var groupMember = new GroupMemberEntity
                 {
                     MemberId = _userId,
                     GroupId = group.GroupId,

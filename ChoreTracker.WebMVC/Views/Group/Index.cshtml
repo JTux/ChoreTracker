@@ -104,3 +104,7 @@
 }
 
 @Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO { GroupId = Model.GroupId })
+
+<p>
+    @Html.ActionLink("Leave Group", "Create", null, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
+</p>

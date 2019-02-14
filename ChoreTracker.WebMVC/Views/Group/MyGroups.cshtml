@@ -6,10 +6,6 @@
 
 <h2>MyGroups</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create") |
-    @Html.ActionLink("Join Group", "Join")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -31,10 +27,15 @@
                 @Html.DisplayFor(modelItem => item.InGroup)
             </td>
             <td>
-                @Html.ActionLink("Details", "Index", new { id = item.GroupId }) | 
+                @Html.ActionLink("Details", "Index", new { id = item.GroupId }) |
                 @Html.ActionLink("Rewards", "Index", "Reward", new { id = item.GroupId }, null)
             </td>
         </tr>
     }
 
 </table>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
+    @Html.ActionLink("Join Group", "Join", null, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
+</p>
