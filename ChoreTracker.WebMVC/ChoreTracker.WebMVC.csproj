@@ -217,6 +217,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\ChoreTracker - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -287,7 +288,7 @@
     <Content Include="Views\Admin\AdminCreate.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
-    <Content Include="Views\Group\JoinGroup.cshtml" />
+    <Content Include="Views\Group\Join.cshtml" />
     <Content Include="Views\Reward\Create.cshtml" />
     <Content Include="Views\Reward\Index.cshtml" />
     <Content Include="Views\Comment\_CommentCreate.cshtml" />
@@ -298,6 +299,7 @@
     <Content Include="Views\Comment\_CommentDelete.cshtml" />
     <Content Include="Views\Reward\_RewardClaim.cshtml" />
     <Content Include="Views\Shared\_ModalView.cshtml" />
+    <Content Include="Views\Group\MyGroups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

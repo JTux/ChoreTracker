@@ -41,37 +41,29 @@ namespace ChoreTracker.WebMVC
 
             if (!roleManager.RoleExists("Admin"))
             {
-                var role = new IdentityRole();
-                role.Name = "Admin";
+                var role = new IdentityRole { Name = "Admin" };
                 roleManager.Create(role);
 
-                var user = new ApplicationUser();
-                user.UserName = "Admin";
-                user.Email = "admin@admin.com";
-                user.FirstName = "Mr";
-                user.LastName = "Admin";
+                var user = new ApplicationUser
+                {
+                    UserName = "Admin",
+                    Email = "admin@admin.com",
+                    FirstName = "Mr",
+                    LastName = "Admin"
+                };
 
                 string password = "Test1!";
 
                 var checkUser = userManager.Create(user, password);
 
                 if (checkUser.Succeeded)
-                {
-                    var result = userManager.AddToRole(user.Id, "Admin");
-                }
+                    userManager.AddToRole(user.Id, "Admin");
             }
 
-            if (!roleManager.RoleExists("GroupOwner"))
+            if (!roleManager.RoleExists("User"))
             {
                 var role = new IdentityRole();
-                role.Name = "GroupOwner";
-                roleManager.Create(role);
-            }
-
-            if (!roleManager.RoleExists("GroupMember"))
-            {
-                var role = new IdentityRole();
-                role.Name = "GroupMember";
+                role.Name = "User";
                 roleManager.Create(role);
             }
         }

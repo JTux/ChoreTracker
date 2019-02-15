@@ -9,5 +9,8 @@ namespace ChoreTracker.WebMVC.DataContract.Comment
 
         [Required]
         public string Content { get; set; }
+
+        [Required]
+        public int GroupId { get; set; }
     }
 }

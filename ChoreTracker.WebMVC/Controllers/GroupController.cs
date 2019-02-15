@@ -6,6 +6,7 @@ using ChoreTracker.WebMVC.DataContract.Group;
 using ChoreTracker.WebMVC.Models.CommentModels;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ChoreTracker.WebMVC.Controllers
@@ -13,24 +14,28 @@ namespace ChoreTracker.WebMVC.Controllers
     [Authorize]
     public class GroupController : Controller
     {
-        // GET: Group
-        public ActionResult Index()
+        // GET: Group/MyGroups
+        public ActionResult MyGroups()
         {
             var svc = GetGroupService();
-            if (!svc.CheckForExistingGroup())
-            {
-                if (User.IsInRole("GroupOwner"))
-                    return RedirectToAction("Create");
+            var model = svc.GetMyGroups();
+            return View(model);
+        }
 
-                if (User.IsInRole("GroupMember"))
-                    return RedirectToAction("JoinGroup");
-            }
+        // GET: Group
+        public ActionResult Index(int id)
+        {
+            var svc = GetGroupService();
+            if (svc.IsApplicant(id) || !svc.CheckForExistingGroup(id))
+                return RedirectToAction("MyGroups");
 
-            var commentService = GetCommentService();
-            var model = svc.GetGroupInfo();
+            var commentSvc = GetCommentService();
+            var model = svc.GetGroupInfo(id);
+
             ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
             ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
-            ViewBag.Comments = commentService.GetGroupComments(model.GroupId);
+
+            ViewBag.Comments = commentSvc.GetGroupComments(model.GroupId);
 
             return View(model);
         }
@@ -38,12 +43,6 @@ namespace ChoreTracker.WebMVC.Controllers
         // GET: Group/Create
         public ActionResult Create()
         {
-            var svc = GetGroupService();
-            if (svc.CheckForExistingGroup())
-            {
-                return RedirectToAction("Index");
-            }
-
             return View();
         }
 
@@ -60,27 +59,24 @@ namespace ChoreTracker.WebMVC.Controllers
             var svc = GetGroupService();
             var rao = new GroupCreateRAO { GroupName = dto.GroupName };
 
-
             if (svc.CreateGroup(rao))
             {
-                return RedirectToAction("Index");
+                var id = svc.GetGroupIDByName(rao.GroupName);
+                return RedirectToAction("Index", new { id });
             }
 
             ModelState.AddModelError("", "Group could not be created.");
             return View();
         }
 
+        [ActionName("Join")]
         public ActionResult JoinGroup()
         {
-            var svc = GetGroupService();
-
-            if (svc.CheckForExistingGroup())
-                return RedirectToAction("Index");
-
             return View();
         }
 
         [HttpPost]
+        [ActionName("Join")]
         [ValidateAntiForgeryToken]
         public ActionResult JoinGroup(GroupJoinDTO dto)
         {
@@ -92,10 +88,31 @@ namespace ChoreTracker.WebMVC.Controllers
             var rao = new GroupJoinRAO { GroupInviteKey = dto.GroupInviteKey };
 
             if (svc.JoinGroup(rao))
-                return RedirectToAction("Index");
+            {
+                var id = svc.GetGroupIDByKey(rao.GroupInviteKey);
+                return RedirectToAction("Index", new { id });
+            }
 
             ModelState.AddModelError("", "Could not join group.");
             return View();
+        }
+
+        public ActionResult Acceptance(int id, int groupId, bool accepted)
+        {
+            var svc = GetGroupService();
+            var rao = new GroupAcceptanceRAO
+            {
+                GroupMemberId = id,
+                GroupId = groupId,
+                Accepted = accepted
+            };
+
+            if (svc.Acceptance(rao))
+            {
+                return RedirectToAction("Index", new { id = groupId });
+            }
+
+            return RedirectToAction("Index", new { id = groupId });
         }
 
         private GroupService GetGroupService() => new GroupService(Guid.Parse(User.Identity.GetUserId()));

@@ -1,25 +1,20 @@
-﻿using ChoreTracker.Data.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ChoreTracker.Data
+namespace ChoreTracker.Data.Entities
 {
-    public class GroupMember
+    public class GroupMemberEntity
     {
         [Key]
         public int GroupMemberId { get; set; }
 
         [Required]
-        public int GroupId { get; set; }
-
-        [Required]
         public Guid MemberId { get; set; }
 
         public bool InGroup { get; set; }
+
+        [Required]
+        public int GroupId { get; set; }
 
         public virtual GroupEntity Group { get; set; }
     }
