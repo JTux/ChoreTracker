@@ -1,6 +1,6 @@
 ﻿using ChoreTracker.Services;
 using ChoreTracker.Services.DataContract.Comment;
-using ChoreTracker.WebMVC.DataContract.Comment;
+using ChoreTracker.Web.DataContract.Comment;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Web.Mvc;

@@ -3,8 +3,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Web.Mvc;
-using ChoreTracker.WebMVC.DataContract.Admin;
 using ChoreTracker.Services.DataContract.Admin;
+using ChoreTracker.Web.DataContract.Admin;
 
 namespace ChoreTracker.WebMVC.Controllers
 {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ChoreTracker.WebMVC.DataContract")]
+[assembly: AssemblyTitle("ChoreTracker.Web.DataContract")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ChoreTracker.WebMVC.DataContract")]
+[assembly: AssemblyProduct("ChoreTracker.Web.DataContract")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a25be0fb-f71c-4f17-9792-85db54b50e92")]
+[assembly: Guid("8bc7d20e-b683-4698-bf13-e5eaebe39878")]
 
 // Version information for an assembly consists of the following four values:
 //

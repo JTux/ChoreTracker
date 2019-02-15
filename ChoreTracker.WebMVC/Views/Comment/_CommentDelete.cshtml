@@ -1,5 +1,5 @@
 ﻿
-@model ChoreTracker.WebMVC.DataContract.Comment.CommentDetailDTO
+@model ChoreTracker.Web.DataContract.Comment.CommentDetailDTO
 
 @{
     ViewBag.CommentModal = $"CommentDelete{Model.CommentId}";
@@ -28,6 +28,7 @@
                                     @using (Html.BeginForm("Delete", "Comment", new { id = Model.CommentId }, FormMethod.Post))
                                     {
                                         @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model => model.GroupId)
                                         @Html.HiddenFor(model => model.CommentId)
 
                                         <p>

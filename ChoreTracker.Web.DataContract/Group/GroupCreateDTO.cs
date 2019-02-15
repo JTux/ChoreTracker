@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.WebMVC.DataContract.Group
+namespace ChoreTracker.Web.DataContract.Group
 {
     public class GroupCreateDTO
     {

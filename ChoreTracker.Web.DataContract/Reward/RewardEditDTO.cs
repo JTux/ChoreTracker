@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.WebMVC.DataContract.Reward
+namespace ChoreTracker.Web.DataContract.Reward
 {
     public class RewardEditDTO
     {

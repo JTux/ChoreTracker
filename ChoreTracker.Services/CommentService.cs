@@ -1,7 +1,7 @@
 ﻿using ChoreTracker.Data;
 using ChoreTracker.Data.Entities;
 using ChoreTracker.Services.DataContract.Comment;
-using ChoreTracker.WebMVC.DataContract.Comment;
+using ChoreTracker.Web.DataContract.Comment;
 using System;
 using System.Collections.Generic;
 using System.Linq;

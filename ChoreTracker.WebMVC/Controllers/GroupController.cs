@@ -1,12 +1,8 @@
 ﻿using ChoreTracker.Services;
-using ChoreTracker.Services.DataContract.Comment;
 using ChoreTracker.Services.DataContract.Group;
-using ChoreTracker.WebMVC.DataContract.Comment;
-using ChoreTracker.WebMVC.DataContract.Group;
-using ChoreTracker.WebMVC.Models.CommentModels;
+using ChoreTracker.Web.DataContract.Group;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ChoreTracker.WebMVC.Controllers

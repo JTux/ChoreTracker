@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.WebMVC.DataContract.Admin
+namespace ChoreTracker.Web.DataContract.Admin
 {
     public class AdminUserCreateDTO
     {

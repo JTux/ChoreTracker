@@ -1,4 +1,4 @@
-﻿namespace ChoreTracker.WebMVC.DataContract.Comment
+﻿namespace ChoreTracker.Web.DataContract.Comment
 {
     public class CommentDetailDTO
     {
