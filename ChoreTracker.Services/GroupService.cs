@@ -64,7 +64,10 @@ namespace ChoreTracker.Services
                     GroupName = m.Group.GroupName,
                     InGroup = m.InGroup,
                     GroupId = m.GroupId
-                });
+                }).ToList();
+                foreach(var member in groupMemberList)
+                    member.InviteKey = ctx.Groups.Single(g => g.GroupId == member.GroupId).GroupInviteKey;
+
                 return groupMemberList.ToArray();
             }
         }

@@ -14,6 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.InGroup)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InviteKey)
+        </th>
         <th></th>
     </tr>
 
@@ -25,6 +28,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InGroup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InviteKey)
             </td>
             <td>
                 @Html.ActionLink("Details", "Index", new { id = item.GroupId }) |
