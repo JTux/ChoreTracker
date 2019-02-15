@@ -5,7 +5,7 @@ using System.Text;
 using ChoreTracker.Data;
 using ChoreTracker.Data.Entities;
 using ChoreTracker.Services.DataContract.Group;
-using ChoreTracker.WebMVC.DataContract.Group;
+using ChoreTracker.Web.DataContract.Group;
 
 namespace ChoreTracker.Services
 {

@@ -1,6 +1,6 @@
 ﻿using ChoreTracker.Services;
 using ChoreTracker.Services.DataContract.Reward;
-using ChoreTracker.WebMVC.DataContract.Reward;
+using ChoreTracker.Web.DataContract.Reward;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Web.Mvc;

@@ -1,7 +1,7 @@
 ﻿using ChoreTracker.Data;
 using ChoreTracker.Data.Entities;
 using ChoreTracker.Services.DataContract.Reward;
-using ChoreTracker.WebMVC.DataContract.Reward;
+using ChoreTracker.Web.DataContract.Reward;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,6 @@ namespace ChoreTracker.Services
             _userId = userId;
         }
 
-        // TODO: Fix these comments
         public bool CreateReward(RewardCreateRAO model)
         {
             var groupService = new GroupService(_userId);
