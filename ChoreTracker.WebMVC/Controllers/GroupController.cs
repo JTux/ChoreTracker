@@ -34,6 +34,7 @@ namespace ChoreTracker.WebMVC.Controllers
 
             ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
             ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
+
             ViewBag.Comments = commentSvc.GetGroupComments(model.GroupId);
 
             return View(model);

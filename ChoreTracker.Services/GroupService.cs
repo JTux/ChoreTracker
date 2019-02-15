@@ -74,7 +74,7 @@ namespace ChoreTracker.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var members = new List<GroupMemberDetailDTO>();
-                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == false);
+                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == false).ToList();
 
                 foreach (var gm in groupMembers)
                 {
@@ -95,11 +95,11 @@ namespace ChoreTracker.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var members = new List<GroupMemberDetailDTO>();
-                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == true);
+                var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == true).ToList();
 
                 foreach (var gm in groupMembers)
                 {
-                    var member = ctx.Users.Single(u => u.Id == gm.MemberId.ToString());
+                    var member = ctx.Users.FirstOrDefault(u => u.Id == gm.MemberId.ToString());
                     members.Add(new GroupMemberDetailDTO
                     {
                         UserName = member.UserName
