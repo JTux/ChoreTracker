@@ -93,6 +93,20 @@ namespace ChoreTracker.WebMVC.Controllers
             return View();
         }
 
+        public ActionResult Leave(int id)
+        {
+            var svc = GetGroupService();
+            var group = svc.GetGroupInfo(id);
+
+            var rao = new GroupLeaveRAO { GroupId = group.GroupId, GroupInviteKey = group.GroupInviteKey };
+
+            if (svc.LeaveGroup(rao))
+                return RedirectToAction("MyGroups");
+
+            TempData["FailResult"] = "Cannot leave populated group.";
+            return RedirectToAction("Index", new { id });
+        }
+
         public ActionResult Acceptance(int id, int groupId, bool accepted)
         {
             var svc = GetGroupService();

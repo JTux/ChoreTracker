@@ -50,6 +50,7 @@
     <Compile Include="Group\GroupDetailDTO.cs" />
     <Compile Include="Group\GroupCreateDTO.cs" />
     <Compile Include="Group\GroupJoinDTO.cs" />
+    <Compile Include="Group\GroupLeaveDTO.cs" />
     <Compile Include="Group\GroupListItemDTO.cs" />
     <Compile Include="Group\GroupMemberDetailDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

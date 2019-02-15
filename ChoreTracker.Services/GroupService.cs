@@ -65,7 +65,7 @@ namespace ChoreTracker.Services
                     InGroup = m.InGroup,
                     GroupId = m.GroupId
                 }).ToList();
-                foreach(var member in groupMemberList)
+                foreach (var member in groupMemberList)
                     member.InviteKey = ctx.Groups.Single(g => g.GroupId == member.GroupId).GroupInviteKey;
 
                 return groupMemberList.ToArray();
@@ -204,11 +204,11 @@ namespace ChoreTracker.Services
             return key;
         }
 
-        public bool JoinGroup(GroupJoinRAO model)
+        public bool JoinGroup(GroupJoinRAO rao)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var group = ctx.Groups.FirstOrDefault(g => g.GroupInviteKey == model.GroupInviteKey);
+                var group = ctx.Groups.FirstOrDefault(g => g.GroupInviteKey == rao.GroupInviteKey);
                 if (group == null)
                     return false;
 
@@ -221,6 +221,33 @@ namespace ChoreTracker.Services
 
                 ctx.GroupMembers.Add(groupMember);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool LeaveGroup(GroupLeaveRAO rao)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var group = ctx.Groups.FirstOrDefault(g => g.GroupInviteKey == rao.GroupInviteKey);
+                var groupMemberCount = ctx.GroupMembers.Where(gm => gm.GroupId == rao.GroupId).Count();
+                if (group == null)
+                    return false;
+                else if (group.OwnerId == _userId && groupMemberCount > 1)
+                    return false;
+
+                int changes = 0;
+
+                var groupMember = ctx.GroupMembers.FirstOrDefault(gm => gm.MemberId == _userId && gm.GroupId == rao.GroupId);
+                ctx.GroupMembers.Remove(groupMember);
+                changes++;
+
+                if(groupMemberCount == 1)
+                {
+                    ctx.Groups.Remove(group);
+                    changes++;
+                }
+
+                return ctx.SaveChanges() == changes;
             }
         }
 

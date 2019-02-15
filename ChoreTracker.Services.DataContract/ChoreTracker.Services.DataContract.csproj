@@ -50,6 +50,7 @@
     <Compile Include="Group\GroupCreateRAO.cs" />
     <Compile Include="Group\GroupDetailRAO.cs" />
     <Compile Include="Group\GroupJoinRAO.cs" />
+    <Compile Include="Group\GroupLeaveRAO.cs" />
     <Compile Include="Group\GroupMemberDetailRAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reward\RewardClaimRAO.cs" />
