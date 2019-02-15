@@ -103,8 +103,19 @@ namespace ChoreTracker.WebMVC.Controllers
             if (svc.LeaveGroup(rao))
                 return RedirectToAction("MyGroups");
 
-            TempData["FailResult"] = "Cannot leave populated group.";
+            TempData["FailResult"] = "Cannot leave group.";
             return RedirectToAction("Index", new { id });
+        }
+
+        public ActionResult KickMember(int memberId, int groupId)
+        {
+            var svc = GetGroupService();
+
+            if (svc.KickMember(memberId))
+                return RedirectToAction("Index", new { id = groupId });
+
+            TempData["FailResult"] = "Cannot kick member.";
+            return RedirectToAction("Index", new { id = groupId });
         }
 
         public ActionResult Acceptance(int id, int groupId, bool accepted)

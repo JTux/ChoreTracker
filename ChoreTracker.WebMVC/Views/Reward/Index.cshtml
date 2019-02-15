@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ChoreTracker.WebMVC.DataContract.Reward.RewardListItemDTO>
+﻿@model IEnumerable<ChoreTracker.Web.DataContract.Reward.RewardListItemDTO>
 
 @{
     ViewBag.Title = "Index";
@@ -7,13 +7,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.GroupId })
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RewardId)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.RewardName)
         </th>
@@ -31,9 +28,6 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RewardId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.RewardName)
             </td>
             <td>
@@ -44,7 +38,7 @@
             </td>
             <td>
                 @{
-                    var reward = new ChoreTracker.WebMVC.DataContract.Reward.RewardClaimDTO
+                    var reward = new ChoreTracker.Web.DataContract.Reward.RewardClaimDTO
                     {
                         RewardId = item.RewardId,
                         RewardName = item.RewardName,

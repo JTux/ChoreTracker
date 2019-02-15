@@ -36,7 +36,8 @@ namespace ChoreTracker.Services
                         GroupId = group.GroupId,
                         GroupName = group.GroupName,
                         GroupInviteKey = group.GroupInviteKey,
-                        GroupOwner = owner.UserName
+                        GroupOwner = owner.UserName,
+                        GroupOwnerId = Guid.Parse(owner.Id)
                     };
                 }
 
@@ -99,17 +100,33 @@ namespace ChoreTracker.Services
             {
                 var members = new List<GroupMemberDetailDTO>();
                 var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == true).ToList();
-
+                var ownerId = ctx.Groups.Single(g => g.GroupId == groupId).OwnerId;
                 foreach (var gm in groupMembers)
                 {
+                    bool isOwner = false;
+                    if (gm.MemberId == ownerId)
+                        isOwner = true;
+
                     var member = ctx.Users.FirstOrDefault(u => u.Id == gm.MemberId.ToString());
                     members.Add(new GroupMemberDetailDTO
                     {
-                        UserName = member.UserName
+                        MemberId = gm.GroupMemberId,
+                        UserName = member.UserName,
+                        IsOwner = isOwner
                     });
                 }
 
                 return members;
+            }
+        }
+
+        public bool KickMember(int memberId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var groupMember = ctx.GroupMembers.Single(gm => gm.GroupMemberId == memberId);
+                ctx.GroupMembers.Remove(groupMember);
+                return ctx.SaveChanges() == 1;
             }
         }
 
@@ -241,7 +258,7 @@ namespace ChoreTracker.Services
                 ctx.GroupMembers.Remove(groupMember);
                 changes++;
 
-                if(groupMemberCount == 1)
+                if (groupMemberCount == 1)
                 {
                     ctx.Groups.Remove(group);
                     changes++;

@@ -15,12 +15,16 @@ namespace ChoreTracker.WebMVC.Controllers
         {
             var svc = CreateRewardService();
             var model = svc.GetRewards(id);
+
+            ViewBag.GroupId = id;
+
             return View(model);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            var model = new RewardCreateDTO { GroupId = id };
+            return View(model);
         }
 
         [HttpPost]
@@ -35,6 +39,7 @@ namespace ChoreTracker.WebMVC.Controllers
             var svc = CreateRewardService();
             var rao = new RewardCreateRAO
             {
+                GroupId = dto.GroupId,
                 RewardCost = dto.RewardCost,
                 RewardDescription = dto.RewardDescription,
                 RewardName = dto.RewardName
@@ -42,7 +47,7 @@ namespace ChoreTracker.WebMVC.Controllers
 
             if (svc.CreateReward(rao))
             {
-                return RedirectToAction("Index", "Group", null);
+                return RedirectToAction("Index", "Reward", new { id = dto.GroupId });
             }
 
             return View(dto);

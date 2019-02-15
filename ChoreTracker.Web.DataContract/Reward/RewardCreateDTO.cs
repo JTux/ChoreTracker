@@ -15,5 +15,8 @@ namespace ChoreTracker.Web.DataContract.Reward
         [Required]
         [Display(Name = "Cost of Reward")]
         public int RewardCost { get; set; }
+
+        [Required]
+        public int GroupId { get; set; }
     }
 }

@@ -55,7 +55,12 @@
             <tr>
                 <td>@gm.UserName</td>
                 <td>@gm.RewardPoints</td>
-                <td></td>
+                <td>
+                    @if (!gm.IsOwner && User.Identity.GetUserId() == Model.GroupOwnerId.ToString())
+                    {
+                        @Html.ActionLink("Kick", "KickMember", "Group", new { memberId = gm.MemberId, groupId = Model.GroupId }, null)
+                    }
+                </td>
             </tr>
         }
     </table>
