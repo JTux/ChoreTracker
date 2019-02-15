@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ChoreTracker.Web.DataContract.Group.GroupListItemDTO>
+
+@{
+    ViewBag.Title = "MyGroups";
+}
+
+<h2>MyGroups</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InGroup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InviteKey)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InGroup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InviteKey)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Index", new { id = item.GroupId }) |
+                @Html.ActionLink("Rewards", "Index", "Reward", new { id = item.GroupId }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
+    @Html.ActionLink("Join Group", "Join", null, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
+</p>

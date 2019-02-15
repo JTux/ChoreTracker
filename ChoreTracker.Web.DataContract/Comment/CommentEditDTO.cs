@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.WebMVC.DataContract.Comment
+namespace ChoreTracker.Web.DataContract.Comment
 {
     public class CommentEditDTO
     {
@@ -9,5 +9,8 @@ namespace ChoreTracker.WebMVC.DataContract.Comment
 
         [Required]
         public string Content { get; set; }
+
+        [Required]
+        public int GroupId { get; set; }
     }
 }

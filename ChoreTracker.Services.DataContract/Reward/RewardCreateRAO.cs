@@ -2,6 +2,8 @@
 {
     public class RewardCreateRAO
     {
+        public int GroupId { get; set; }
+
         public string RewardName { get; set; }
 
         public string RewardDescription { get; set; }

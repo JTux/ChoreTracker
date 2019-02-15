@@ -1,5 +1,5 @@
 ﻿
-@model ChoreTracker.WebMVC.DataContract.Comment.CommentEditDTO
+@model ChoreTracker.Web.DataContract.Comment.CommentEditDTO
 
 @{
     ViewBag.CommentModal = $"CommentEdit{Model.CommentId}";
@@ -29,6 +29,7 @@
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.HiddenFor(model => model.CommentId)
+                                        @Html.HiddenFor(model => model.GroupId)
 
                                         <p>
                                             Original comment: @Html.Raw(Model.Content)

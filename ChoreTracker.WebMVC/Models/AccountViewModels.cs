@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ChoreTracker.WebMVC.Models
 {
-    public enum Role { GroupOwner = 1, GroupMember }
+    public enum Role { User = 1, PremiumUser }
 
     public class ExternalLoginConfirmationViewModel
     {

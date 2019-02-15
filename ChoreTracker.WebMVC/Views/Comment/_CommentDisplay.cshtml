@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@using ChoreTracker.WebMVC.DataContract.Comment
+@using ChoreTracker.Web.DataContract.Comment
 @model CommentListItemDTO
 
 @{
@@ -25,8 +25,8 @@
 <div class="comment-option">
     @{
         var commentCreate = new CommentCreateDTO { ParentId = Model.CommentId, GroupId = Model.GroupId };
-        var commentEdit = new CommentEditDTO { CommentId = Model.CommentId, Content = Model.Content };
-        var commentDelete = new CommentDetailDTO { CommentId = Model.CommentId, Content = Model.Content, Poster = Model.Poster };
+        var commentEdit = new CommentEditDTO { CommentId = Model.CommentId, Content = Model.Content, GroupId = Model.GroupId };
+        var commentDelete = new CommentDetailDTO { CommentId = Model.CommentId, Content = Model.Content, Poster = Model.Poster, GroupId = Model.GroupId };
     }
 
     @if (Model.OwnerId == Guid.Parse(User.Identity.GetUserId()) || User.IsInRole("Admin") || User.IsInRole("GroupOwner"))

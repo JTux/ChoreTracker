@@ -1,7 +1,7 @@
 ﻿using ChoreTracker.Data;
 using ChoreTracker.Data.Entities;
 using ChoreTracker.Services.DataContract.Reward;
-using ChoreTracker.WebMVC.DataContract.Reward;
+using ChoreTracker.Web.DataContract.Reward;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace ChoreTracker.Services
                 RewardName = model.RewardName,
                 Description = model.RewardDescription,
                 Cost = model.RewardCost,
-                GroupId = groupService.GetGroupInfo().GroupId
+                GroupId = model.GroupId
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -35,17 +35,15 @@ namespace ChoreTracker.Services
             }
         }
 
-        public List<RewardListItemDTO> GetRewards()
+        public List<RewardListItemDTO> GetRewards(int id)
         {
             var groupService = new GroupService(_userId);
-
-            var groupId = groupService.GetGroupInfo().GroupId;
 
             using (var ctx = new ApplicationDbContext())
             {
                 return ctx
                     .Rewards
-                    .Where(r => r.GroupId == groupId)
+                    .Where(r => r.GroupId == id)
                     .Select(r =>
                         new RewardListItemDTO
                         {
@@ -60,7 +58,28 @@ namespace ChoreTracker.Services
 
         public bool ClaimReward(RewardClaimRAO rao)
         {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var user = ctx.Users.Single(u => u.Id == _userId.ToString());
+                var entity = ctx.Rewards.Single(r => r.RewardId == rao.RewardId);
+                
+            }
             return true;
+        }
+
+        public RewardDetailDTO GetRewardById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Rewards.Single(r => r.RewardId == id);
+                return new RewardDetailDTO
+                {
+                    RewardId = entity.RewardId,
+                    RewardCost = entity.Cost,
+                    RewardName = entity.RewardName,
+                    RewardDescription = entity.Description
+                };
+            }
         }
     }
 }

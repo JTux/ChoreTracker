@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.WebMVC.DataContract.Reward
+namespace ChoreTracker.Web.DataContract.Reward
 {
-    public class RewardCreateDTO
+    public class RewardListItemDTO
     {
+        [Required]
+        public int RewardId { get; set; }
+
         [Required]
         [Display(Name = "Name of Reward")]
         public string RewardName { get; set; }

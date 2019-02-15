@@ -94,9 +94,9 @@
       <Project>{905C9A39-FFC4-41A3-899A-068B944032A1}</Project>
       <Name>ChoreTracker.Services.DataContract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ChoreTracker.WebMVC.DataContract\ChoreTracker.WebMVC.DataContract.csproj">
-      <Project>{A25BE0FB-F71C-4F17-9792-85DB54B50E92}</Project>
-      <Name>ChoreTracker.WebMVC.DataContract</Name>
+    <ProjectReference Include="..\ChoreTracker.Web.DataContract\ChoreTracker.Web.DataContract.csproj">
+      <Project>{8BC7D20E-B683-4698-BF13-E5EAEBE39878}</Project>
+      <Name>ChoreTracker.Web.DataContract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

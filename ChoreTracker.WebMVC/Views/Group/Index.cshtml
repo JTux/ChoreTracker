@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@model ChoreTracker.WebMVC.DataContract.Group.GroupDetailDTO
+@model ChoreTracker.Web.DataContract.Group.GroupDetailDTO
 
 @{
     ViewBag.Title = @Html.DisplayFor(model => model.GroupName);
@@ -26,7 +26,9 @@
         <td>
             @Html.DisplayFor(model => model.GroupInviteKey)
         </td>
-        <td></td>
+        <td>
+            @Html.ActionLink("Rewards", "Index", "Reward", new { id = Model.GroupId }, null)
+        </td>
     </tr>
 </table>
 @if (ViewBag.GroupMembers != null && ViewBag.GroupMembers.Count != 0)
@@ -62,7 +64,10 @@
             <tr>
                 <td>@gm.UserName</td>
                 <td>@gm.RewardPoints</td>
-                <td></td>
+                <td>
+                    @Html.ActionLink("Accept", "Acceptance", "Group", new { id = gm.MemberId, groupId = Model.GroupId, accepted = true }, null) |
+                    @Html.ActionLink("Deny", "Acceptance", "Group", new { id = gm.MemberId, groupId = Model.GroupId, accepted = false }, null)
+                </td>
             </tr>
         }
     </table>
@@ -78,7 +83,7 @@
         @foreach (var c in ViewBag.Comments)
         {
             var parentContent = c.Content;
-            var comment = new ChoreTracker.WebMVC.DataContract.Comment.CommentListItemDTO
+            var comment = new ChoreTracker.Web.DataContract.Comment.CommentListItemDTO
             {
                 Content = c.Content,
                 CommentId = c.CommentId,
@@ -98,4 +103,8 @@
     </table>
 }
 
-@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.WebMVC.DataContract.Comment.CommentCreateDTO { GroupId = Model.GroupId })
+@Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.Web.DataContract.Comment.CommentCreateDTO { GroupId = Model.GroupId })
+
+<p>
+    @Html.ActionLink("Leave Group", "Create", null, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
+</p>

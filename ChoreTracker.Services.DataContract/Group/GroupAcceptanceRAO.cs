@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChoreTracker.Services.DataContract.Comment
+namespace ChoreTracker.Services.DataContract.Group
 {
-    public class CommentEditRAO
+    public class GroupAcceptanceRAO
     {
-        public int CommentId { get; set; }
-        public string Content { get; set; }
+        public int GroupMemberId { get; set; }
         public int GroupId { get; set; }
+        public bool Accepted { get; set; }
     }
 }

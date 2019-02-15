@@ -75,17 +75,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClaimedReward.cs" />
+    <Compile Include="Entities\ClaimedRewardEntity.cs" />
     <Compile Include="Entities\CommentEntity.cs" />
     <Compile Include="Entities\GroupEntity.cs" />
+    <Compile Include="Entities\GroupMemberEntity.cs" />
     <Compile Include="Entities\RewardEntity.cs" />
-    <Compile Include="GroupMember.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\201902112115407_InitialCreate.cs" />
+    <Compile Include="Migrations\201902112115407_InitialCreate.Designer.cs">
+      <DependentUpon>201902112115407_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902141958385_rediddbsets.cs" />
+    <Compile Include="Migrations\201902141958385_rediddbsets.Designer.cs">
+      <DependentUpon>201902141958385_rediddbsets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902112115407_InitialCreate.resx">
+      <DependentUpon>201902112115407_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902141958385_rediddbsets.resx">
+      <DependentUpon>201902141958385_rediddbsets.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

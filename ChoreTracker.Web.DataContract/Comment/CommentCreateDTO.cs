@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ChoreTracker.WebMVC.DataContract.Comment
+namespace ChoreTracker.Web.DataContract.Comment
 {
     public class CommentCreateDTO
     {
