@@ -15,5 +15,7 @@ namespace ChoreTracker.Data.Entities
         public int RewardId { get; set; }
 
         public virtual RewardEntity Reward { get; set; }
+
+        public int ClaimedCount { get; set; }
     }
 }

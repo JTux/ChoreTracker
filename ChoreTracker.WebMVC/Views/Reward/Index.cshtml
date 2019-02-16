@@ -40,6 +40,7 @@
                 @{
                     var reward = new ChoreTracker.Web.DataContract.Reward.RewardClaimDTO
                     {
+                        GroupId = ViewBag.GroupId,
                         RewardId = item.RewardId,
                         RewardName = item.RewardName,
                         RewardDescription = item.RewardDescription,
@@ -62,3 +63,5 @@
     }
 
 </table>
+
+@Html.ActionLink("Return to Group", "Index", "Group", new { id = ViewBag.GroupId }, null)

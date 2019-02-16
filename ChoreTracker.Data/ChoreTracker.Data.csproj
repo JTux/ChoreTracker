@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201902141958385_rediddbsets.Designer.cs">
       <DependentUpon>201902141958385_rediddbsets.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902160207488_ChangedRewardEntities.cs" />
+    <Compile Include="Migrations\201902160207488_ChangedRewardEntities.Designer.cs">
+      <DependentUpon>201902160207488_ChangedRewardEntities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902141958385_rediddbsets.resx">
       <DependentUpon>201902141958385_rediddbsets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902160207488_ChangedRewardEntities.resx">
+      <DependentUpon>201902160207488_ChangedRewardEntities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

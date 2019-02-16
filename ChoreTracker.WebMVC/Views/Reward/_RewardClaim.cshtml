@@ -27,6 +27,7 @@
                                     @using (Html.BeginForm("Claim", "Reward", FormMethod.Post))
                                     {
                                         @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model => model.GroupId)
                                         @Html.HiddenFor(model => model.RewardId)
                                         @Html.HiddenFor(model => model.RewardName)
                                         @Html.HiddenFor(model => model.RewardDescription)

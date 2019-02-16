@@ -11,6 +11,8 @@ namespace ChoreTracker.Data.Entities
         [Required]
         public Guid MemberId { get; set; }
 
+        public int EarnedPoints { get; set; }
+
         public bool InGroup { get; set; }
 
         [Required]
