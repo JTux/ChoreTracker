@@ -23,5 +23,7 @@ namespace ChoreTracker.Web.DataContract.Reward
         [Required]
         [Display(Name = "Claim Count")]
         public int ClaimedCount { get; set; }
+
+        public int GroupId { get; set; }
     }
 }

@@ -9,6 +9,16 @@
     @Html.DisplayFor(model => model.GroupName)
 </h2>
 
+@if (TempData.ContainsKey("FailResult"))
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["FailResult"]
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -45,7 +55,12 @@
             <tr>
                 <td>@gm.UserName</td>
                 <td>@gm.RewardPoints</td>
-                <td></td>
+                <td>
+                    @if (!gm.IsOwner && User.Identity.GetUserId() == Model.GroupOwnerId.ToString())
+                    {
+                        @Html.ActionLink("Kick", "KickMember", "Group", new { memberId = gm.MemberId, groupId = Model.GroupId }, null)
+                    }
+                </td>
             </tr>
         }
     </table>
@@ -106,5 +121,5 @@
 @Html.Partial("~/Views/Comment/_CommentCreate.cshtml", new ChoreTracker.Web.DataContract.Comment.CommentCreateDTO { GroupId = Model.GroupId })
 
 <p>
-    @Html.ActionLink("Leave Group", "Create", null, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
+    @Html.ActionLink("Leave Group", "Leave", new { id = Model.GroupId }, htmlAttributes: new { @class = "btn btn-primary menu-btn" })
 </p>

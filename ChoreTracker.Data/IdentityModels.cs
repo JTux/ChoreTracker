@@ -41,6 +41,7 @@ namespace ChoreTracker.Data
         public DbSet<CommentEntity> Comments { get; set; }
         public DbSet<RewardEntity> Rewards { get; set; }
         public DbSet<ClaimedRewardEntity> ClaimedRewards { get; set; }
+        public DbSet<TaskEntity> Tasks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

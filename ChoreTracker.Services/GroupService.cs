@@ -36,7 +36,8 @@ namespace ChoreTracker.Services
                         GroupId = group.GroupId,
                         GroupName = group.GroupName,
                         GroupInviteKey = group.GroupInviteKey,
-                        GroupOwner = owner.UserName
+                        GroupOwner = owner.UserName,
+                        GroupOwnerId = Guid.Parse(owner.Id)
                     };
                 }
 
@@ -65,14 +66,14 @@ namespace ChoreTracker.Services
                     InGroup = m.InGroup,
                     GroupId = m.GroupId
                 }).ToList();
-                foreach(var member in groupMemberList)
+                foreach (var member in groupMemberList)
                     member.InviteKey = ctx.Groups.Single(g => g.GroupId == member.GroupId).GroupInviteKey;
 
                 return groupMemberList.ToArray();
             }
         }
 
-        public List<GroupMemberDetailDTO> GetApplicants(int groupId)
+        public IEnumerable<GroupMemberDetailDTO> GetApplicants(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -93,23 +94,39 @@ namespace ChoreTracker.Services
             }
         }
 
-        public List<GroupMemberDetailDTO> GetGroupMembers(int groupId)
+        public IEnumerable<GroupMemberDetailDTO> GetGroupMembers(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var members = new List<GroupMemberDetailDTO>();
                 var groupMembers = ctx.GroupMembers.Where(g => g.GroupId == groupId && g.InGroup == true).ToList();
-
+                var ownerId = ctx.Groups.Single(g => g.GroupId == groupId).OwnerId;
                 foreach (var gm in groupMembers)
                 {
+                    bool isOwner = false;
+                    if (gm.MemberId == ownerId)
+                        isOwner = true;
+
                     var member = ctx.Users.FirstOrDefault(u => u.Id == gm.MemberId.ToString());
                     members.Add(new GroupMemberDetailDTO
                     {
-                        UserName = member.UserName
+                        MemberId = gm.GroupMemberId,
+                        UserName = member.UserName,
+                        IsOwner = isOwner
                     });
                 }
 
                 return members;
+            }
+        }
+
+        public bool KickMember(int memberId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var groupMember = ctx.GroupMembers.Single(gm => gm.GroupMemberId == memberId);
+                ctx.GroupMembers.Remove(groupMember);
+                return ctx.SaveChanges() == 1;
             }
         }
 
@@ -172,9 +189,14 @@ namespace ChoreTracker.Services
             }
         }
 
-        public void EditGroupInviteKey()
+        public bool EditGroupInviteKey(string newInviteKey)
         {
+            using (var ctx = new ApplicationDbContext())
+            {
 
+
+                return ctx.SaveChanges() == 1;
+            }
         }
 
         private string GenerateRandomString(int size)
@@ -204,11 +226,11 @@ namespace ChoreTracker.Services
             return key;
         }
 
-        public bool JoinGroup(GroupJoinRAO model)
+        public bool JoinGroup(GroupJoinRAO rao)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var group = ctx.Groups.FirstOrDefault(g => g.GroupInviteKey == model.GroupInviteKey);
+                var group = ctx.Groups.FirstOrDefault(g => g.GroupInviteKey == rao.GroupInviteKey);
                 if (group == null)
                     return false;
 
@@ -221,6 +243,33 @@ namespace ChoreTracker.Services
 
                 ctx.GroupMembers.Add(groupMember);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool LeaveGroup(GroupLeaveRAO rao)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var group = ctx.Groups.FirstOrDefault(g => g.GroupInviteKey == rao.GroupInviteKey);
+                var groupMemberCount = ctx.GroupMembers.Where(gm => gm.GroupId == rao.GroupId).Count();
+                if (group == null)
+                    return false;
+                else if (group.OwnerId == _userId && groupMemberCount > 1)
+                    return false;
+
+                int changes = 0;
+
+                var groupMember = ctx.GroupMembers.FirstOrDefault(gm => gm.MemberId == _userId && gm.GroupId == rao.GroupId);
+                ctx.GroupMembers.Remove(groupMember);
+                changes++;
+
+                if (groupMemberCount == 1)
+                {
+                    ctx.Groups.Remove(group);
+                    changes++;
+                }
+
+                return ctx.SaveChanges() == changes;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ChoreTracker.Web.DataContract.Group
 {
@@ -15,5 +16,7 @@ namespace ChoreTracker.Web.DataContract.Group
 
         [Display(Name = "Group Owner")]
         public string GroupOwner { get; set; }
+
+        public Guid GroupOwnerId { get; set; }
     }
 }

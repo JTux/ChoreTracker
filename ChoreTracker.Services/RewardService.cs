@@ -60,11 +60,22 @@ namespace ChoreTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var user = ctx.Users.Single(u => u.Id == _userId.ToString());
-                var entity = ctx.Rewards.Single(r => r.RewardId == rao.RewardId);
-                
+                var groupMember = ctx.GroupMembers.Single(gm => gm.MemberId == _userId && gm.GroupId == rao.GroupId);
+                var reward = ctx.Rewards.Single(r => r.RewardId == rao.RewardId);
+
+                if (groupMember.EarnedPoints < (reward.Cost * rao.ClaimedCount))
+                    return false;
+
+                var entity = new ClaimedRewardEntity
+                {
+                    OwnerId = groupMember.MemberId,
+                    RewardId = reward.RewardId,
+                    ClaimedCount = rao.ClaimedCount
+                };
+
+                ctx.ClaimedRewards.Add(entity);
+                return ctx.SaveChanges() == 1;
             }
-            return true;
         }
 
         public RewardDetailDTO GetRewardById(int id)

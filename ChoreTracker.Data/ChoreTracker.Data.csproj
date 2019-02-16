@@ -80,6 +80,7 @@
     <Compile Include="Entities\GroupEntity.cs" />
     <Compile Include="Entities\GroupMemberEntity.cs" />
     <Compile Include="Entities\RewardEntity.cs" />
+    <Compile Include="Entities\TaskEntity.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\201902112115407_InitialCreate.cs" />
     <Compile Include="Migrations\201902112115407_InitialCreate.Designer.cs">
@@ -88,6 +89,14 @@
     <Compile Include="Migrations\201902141958385_rediddbsets.cs" />
     <Compile Include="Migrations\201902141958385_rediddbsets.Designer.cs">
       <DependentUpon>201902141958385_rediddbsets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902160207488_ChangedRewardEntities.cs" />
+    <Compile Include="Migrations\201902160207488_ChangedRewardEntities.Designer.cs">
+      <DependentUpon>201902160207488_ChangedRewardEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902161955462_AddedTasks.cs" />
+    <Compile Include="Migrations\201902161955462_AddedTasks.Designer.cs">
+      <DependentUpon>201902161955462_AddedTasks.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +111,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902141958385_rediddbsets.resx">
       <DependentUpon>201902141958385_rediddbsets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902160207488_ChangedRewardEntities.resx">
+      <DependentUpon>201902160207488_ChangedRewardEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902161955462_AddedTasks.resx">
+      <DependentUpon>201902161955462_AddedTasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

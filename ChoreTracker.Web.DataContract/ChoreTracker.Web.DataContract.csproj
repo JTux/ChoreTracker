@@ -50,6 +50,7 @@
     <Compile Include="Group\GroupDetailDTO.cs" />
     <Compile Include="Group\GroupCreateDTO.cs" />
     <Compile Include="Group\GroupJoinDTO.cs" />
+    <Compile Include="Group\GroupLeaveDTO.cs" />
     <Compile Include="Group\GroupListItemDTO.cs" />
     <Compile Include="Group\GroupMemberDetailDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Reward\RewardDetailDTO.cs" />
     <Compile Include="Reward\RewardEditDTO.cs" />
     <Compile Include="Reward\RewardListItemDTO.cs" />
+    <Compile Include="Task\TaskCreateDTO.cs" />
+    <Compile Include="Task\TaskListItemDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
