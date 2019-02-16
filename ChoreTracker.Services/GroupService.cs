@@ -73,7 +73,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        public List<GroupMemberDetailDTO> GetApplicants(int groupId)
+        public IEnumerable<GroupMemberDetailDTO> GetApplicants(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -94,7 +94,7 @@ namespace ChoreTracker.Services
             }
         }
 
-        public List<GroupMemberDetailDTO> GetGroupMembers(int groupId)
+        public IEnumerable<GroupMemberDetailDTO> GetGroupMembers(int groupId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -189,9 +189,14 @@ namespace ChoreTracker.Services
             }
         }
 
-        public void EditGroupInviteKey()
+        public bool EditGroupInviteKey(string newInviteKey)
         {
+            using (var ctx = new ApplicationDbContext())
+            {
 
+
+                return ctx.SaveChanges() == 1;
+            }
         }
 
         private string GenerateRandomString(int size)

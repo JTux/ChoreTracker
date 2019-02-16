@@ -58,6 +58,10 @@
     <Compile Include="Reward\RewardDetailRAO.cs" />
     <Compile Include="Reward\RewardEditRAO.cs" />
     <Compile Include="Reward\RewardListItemRAO.cs" />
+    <Compile Include="Task\TaskCreateRAO.cs" />
+    <Compile Include="Task\TaskDetailRAO.cs" />
+    <Compile Include="Task\TaskEditRAO.cs" />
+    <Compile Include="Task\TaskListItemRAO.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

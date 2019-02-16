@@ -33,8 +33,9 @@
                 @Html.DisplayFor(modelItem => item.InviteKey)
             </td>
             <td>
-                @Html.ActionLink("Details", "Index", new { id = item.GroupId }) |
-                @Html.ActionLink("Rewards", "Index", "Reward", new { id = item.GroupId }, null)
+                @Html.ActionLink("Details", "Index", new { id = item.GroupId }, htmlAttributes: new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Tasks", "Index", "Task", new { id = item.GroupId }, new { @class = "btn btn-primary " }) |
+                @Html.ActionLink("Rewards", "Index", "Reward", new { id = item.GroupId }, new { @class = "btn btn-primary" })
             </td>
         </tr>
     }
