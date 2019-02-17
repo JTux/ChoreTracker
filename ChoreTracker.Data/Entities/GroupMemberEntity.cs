@@ -15,6 +15,8 @@ namespace ChoreTracker.Data.Entities
 
         public bool InGroup { get; set; }
 
+        public bool IsMod { get; set; }
+
         [Required]
         public int GroupId { get; set; }
 

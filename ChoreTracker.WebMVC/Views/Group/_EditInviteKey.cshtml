@@ -1,0 +1,58 @@
+﻿@model ChoreTracker.Web.DataContract.Group.GroupKeyEditDTO
+
+@{
+    ViewBag.KeyModal = $"GroupKey{Model.GroupId}";
+    ViewBag.KeyBtn = $"GroupKeyBtn{Model.GroupId}";
+}
+
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button id="@Html.Raw(ViewBag.KeyBtn)" type="button" class="btn btn-sm btn-default pull-left button button4">
+                        Edit Key
+                    </button>
+
+                    <div class="modal fade" tabindex="-1" id="@Html.Raw(ViewBag.KeyModal)" data-keyboard="true" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4>Edit Invite Key</h4>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @using (Html.BeginForm("EditInviteKey", "Group", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model => model.GroupId)
+
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.NewInviteKey, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="form-group">
+                                            <div style="text-align: right;">
+                                                <input type="submit" value="Reply" class="btn btn-default" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(@Html.Raw(ViewBag.KeyBtn)).click(function () {
+            $(@Html.Raw(ViewBag.KeyModal)).modal('show');
+        });
+    });
+</script>
