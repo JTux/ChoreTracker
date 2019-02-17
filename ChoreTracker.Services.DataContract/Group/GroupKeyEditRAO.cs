@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace ChoreTracker.Services.DataContract.Group
 {
-    public class GroupMemberDetailRAO
+    public class GroupKeyEditRAO
     {
-        public string UserName { get; set; }
-
-        public bool IsMod { get; set; }
-
-        public int RewardPoints { get; set; }
+        public int GroupId { get; set; }
+        public string NewInviteKey { get; set; }
     }
 }

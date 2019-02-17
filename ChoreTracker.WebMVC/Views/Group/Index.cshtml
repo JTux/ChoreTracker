@@ -35,6 +35,11 @@
         </td>
         <td>
             @Html.DisplayFor(model => model.GroupInviteKey)
+
+            @if (ViewBag.IsMod)
+            {
+                @Html.Partial("~/Views/Group/_EditInviteKey.cshtml", new ChoreTracker.Web.DataContract.Group.GroupKeyEditDTO { GroupId = Model.GroupId })
+            }
         </td>
         <td>
             @Html.ActionLink("Rewards", "Index", "Reward", new { id = Model.GroupId }, null)

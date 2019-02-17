@@ -45,6 +45,16 @@ namespace ChoreTracker.Services
             }
         }
 
+        public bool IsMod(int groupId)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var groupMember = ctx.GroupMembers.Single(gm => gm.MemberId == _userId && gm.GroupId == groupId);
+
+                return groupMember.IsMod;
+            }
+        }
+
         public bool IsApplicant(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -64,8 +74,10 @@ namespace ChoreTracker.Services
                 {
                     GroupName = m.Group.GroupName,
                     InGroup = m.InGroup,
-                    GroupId = m.GroupId
+                    GroupId = m.GroupId,
+                    IsMod = m.IsMod
                 }).ToList();
+
                 foreach (var member in groupMemberList)
                     member.InviteKey = ctx.Groups.Single(g => g.GroupId == member.GroupId).GroupInviteKey;
 
@@ -112,7 +124,8 @@ namespace ChoreTracker.Services
                     {
                         MemberId = gm.GroupMemberId,
                         UserName = member.UserName,
-                        IsOwner = isOwner
+                        IsOwner = isOwner,
+                        IsMod = gm.IsMod
                     });
                 }
 
@@ -181,7 +194,8 @@ namespace ChoreTracker.Services
                 {
                     MemberId = _userId,
                     GroupId = id,
-                    InGroup = true
+                    InGroup = true,
+                    IsMod = true
                 };
 
                 ctx.GroupMembers.Add(groupMember);
@@ -189,11 +203,18 @@ namespace ChoreTracker.Services
             }
         }
 
-        public bool EditGroupInviteKey(string newInviteKey)
+        public bool EditGroupInviteKey(GroupKeyEditRAO rao)
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var groupMember = ctx.GroupMembers.Single(gm => gm.GroupId == rao.GroupId && gm.MemberId == _userId);
 
+                if (!groupMember.IsMod || ctx.Groups.Where(g=>g.GroupInviteKey == rao.NewInviteKey).Count() != 0)
+                    return false;
+
+                var group = ctx.Groups.Single(g => g.GroupId == rao.GroupId);
+
+                group.GroupInviteKey = rao.NewInviteKey;
 
                 return ctx.SaveChanges() == 1;
             }

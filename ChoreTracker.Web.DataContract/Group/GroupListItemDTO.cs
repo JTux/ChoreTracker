@@ -15,5 +15,6 @@ namespace ChoreTracker.Web.DataContract.Group
 
         [Display(Name = "Group Invite Key")]
         public string InviteKey { get; set; }
+        public bool IsMod { get; set; }
     }
 }
