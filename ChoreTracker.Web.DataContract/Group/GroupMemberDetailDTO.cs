@@ -9,5 +9,6 @@
         public int RewardPoints { get; set; }
 
         public bool IsOwner { get; set; }
+        public bool IsMod { get; set; }
     }
 }

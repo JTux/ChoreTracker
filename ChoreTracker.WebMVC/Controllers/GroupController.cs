@@ -30,7 +30,7 @@ namespace ChoreTracker.WebMVC.Controllers
 
             ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
             ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
-
+            ViewBag.IsMod = svc.IsMod(model.GroupId);
             ViewBag.Comments = commentSvc.GetGroupComments(model.GroupId);
 
             return View(model);
@@ -65,12 +65,42 @@ namespace ChoreTracker.WebMVC.Controllers
             return View();
         }
 
+        // GET: Group/UpdateInviteKey
+        public ActionResult EditInviteKey()
+        {
+            var service = GetGroupService();
+            return View();
+        }
+
+        // POST: Group/UpdateInviteKey
+        [HttpPost]
+        public ActionResult EditInviteKey(GroupKeyEditDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return View(dto);
+
+            var service = GetGroupService();
+
+            var rao = new GroupKeyEditRAO
+            {
+                GroupId = dto.GroupId,
+                NewInviteKey = dto.NewInviteKey.ToUpper()
+            };
+
+            if (service.EditGroupInviteKey(rao))
+                return RedirectToAction("Index", new { id = dto.GroupId });
+
+            return RedirectToAction("Index", new { id = dto.GroupId });
+        }
+
+        // GET: Group/Join
         [ActionName("Join")]
         public ActionResult JoinGroup()
         {
             return View();
         }
 
+        // POST: Group/Join
         [HttpPost]
         [ActionName("Join")]
         [ValidateAntiForgeryToken]

@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201902161955462_AddedTasks.Designer.cs">
       <DependentUpon>201902161955462_AddedTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902171907397_AddedIsMod.cs" />
+    <Compile Include="Migrations\201902171907397_AddedIsMod.Designer.cs">
+      <DependentUpon>201902171907397_AddedIsMod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902161955462_AddedTasks.resx">
       <DependentUpon>201902161955462_AddedTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902171907397_AddedIsMod.resx">
+      <DependentUpon>201902171907397_AddedIsMod.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
