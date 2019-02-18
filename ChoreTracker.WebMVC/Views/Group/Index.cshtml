@@ -38,7 +38,7 @@
 
             @if (ViewBag.IsMod)
             {
-                @Html.Partial("~/Views/Group/_EditInviteKey.cshtml", new ChoreTracker.Web.DataContract.Group.GroupKeyEditDTO { GroupId = Model.GroupId })
+                @Html.ActionLink("Regenerate Invite Key", "EditInviteKey", new { groupId = Model.GroupId })
             }
         </td>
         <td>
@@ -53,6 +53,7 @@
         <tr>
             <th>Group Members</th>
             <th>Earned Points</th>
+            <th>Is Mod</th>
             <th></th>
         </tr>
         @foreach (var gm in ViewBag.GroupMembers)
@@ -60,8 +61,9 @@
             <tr>
                 <td>@gm.UserName</td>
                 <td>@gm.RewardPoints</td>
+                <td>@gm.IsMod</td>
                 <td>
-                    @if (!gm.IsOwner && User.Identity.GetUserId() == Model.GroupOwnerId.ToString())
+                    @if (!gm.IsOwner && ViewBag.IsMod)
                     {
                         @Html.ActionLink("Kick", "KickMember", "Group", new { memberId = gm.MemberId, groupId = Model.GroupId }, null)
                     }

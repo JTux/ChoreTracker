@@ -61,36 +61,19 @@ namespace ChoreTracker.WebMVC.Controllers
                 return RedirectToAction("Index", new { id });
             }
 
-            ModelState.AddModelError("", "Group could not be created.");
+            TempData["FailResult"] = "Cannot create group.";
             return View();
         }
 
         // GET: Group/UpdateInviteKey
-        public ActionResult EditInviteKey()
+        public ActionResult EditInviteKey(int groupId)
         {
             var service = GetGroupService();
-            return View();
-        }
+            if (service.EditGroupInviteKey(groupId))
+                return RedirectToAction("Index", new { id = groupId });
 
-        // POST: Group/UpdateInviteKey
-        [HttpPost]
-        public ActionResult EditInviteKey(GroupKeyEditDTO dto)
-        {
-            if (!ModelState.IsValid)
-                return View(dto);
-
-            var service = GetGroupService();
-
-            var rao = new GroupKeyEditRAO
-            {
-                GroupId = dto.GroupId,
-                NewInviteKey = dto.NewInviteKey.ToUpper()
-            };
-
-            if (service.EditGroupInviteKey(rao))
-                return RedirectToAction("Index", new { id = dto.GroupId });
-
-            return RedirectToAction("Index", new { id = dto.GroupId });
+            TempData["FailResult"] = "Cannot edit key.";
+            return RedirectToAction("Index", new { id = groupId });
         }
 
         // GET: Group/Join
@@ -119,7 +102,7 @@ namespace ChoreTracker.WebMVC.Controllers
                 return RedirectToAction("Index", new { id });
             }
 
-            ModelState.AddModelError("", "Could not join group.");
+            TempData["FailResult"] = "Cannot join group.";
             return View();
         }
 
@@ -163,6 +146,7 @@ namespace ChoreTracker.WebMVC.Controllers
                 return RedirectToAction("Index", new { id = groupId });
             }
 
+            TempData["FailResult"] = "Cannot accept applicant.";
             return RedirectToAction("Index", new { id = groupId });
         }
 

@@ -6,6 +6,16 @@
 
 <h2>MyGroups</h2>
 
+@if (TempData.ContainsKey("FailResult"))
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["FailResult"]
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
