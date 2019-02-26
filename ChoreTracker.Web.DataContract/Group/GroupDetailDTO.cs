@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ChoreTracker.Web.DataContract.Comment;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChoreTracker.Web.DataContract.Group
@@ -18,5 +20,13 @@ namespace ChoreTracker.Web.DataContract.Group
         public string GroupOwner { get; set; }
 
         public Guid GroupOwnerId { get; set; }
+
+        public IEnumerable<GroupMemberDetailDTO> GroupMembers { get; set; }
+
+        public IEnumerable<GroupMemberDetailDTO> GroupApplicants { get; set; }
+
+        public IEnumerable<CommentListItemDTO> Comments { get; set; }
+
+        public bool IsMod { get; set; }
     }
 }

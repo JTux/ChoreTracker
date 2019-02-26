@@ -56,5 +56,14 @@ namespace ChoreTracker.Services
                 return query;
             }
         }
+
+        //public bool CompleteTask(int taskId)
+        //{
+        //    using(var ctx = new ApplicationDbContext())
+        //    {
+        //        var task = ctx.Tasks.FirstOrDefault(t => t.TaskId == taskId);
+        //        var member = ctx.GroupMembers.FirstOrDefault(m => m.GroupId == task.GroupId);
+        //    }
+        //}
     }
 }
