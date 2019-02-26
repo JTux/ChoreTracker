@@ -19,9 +19,7 @@ namespace ChoreTracker.Services
         public bool CreateComment(CommentCreateRAO model)
         {
             if (model.Content == null)
-            {
                 return false;
-            }
 
             var comment = new CommentEntity
             {
@@ -33,6 +31,11 @@ namespace ChoreTracker.Services
 
             using (var ctx = new ApplicationDbContext())
             {
+                var parent = ctx.Comments.FirstOrDefault(c => c.CommentId == model.ParentId);
+
+                if (parent == null && model.ParentId != 0)
+                    return false;
+
                 ctx.Comments.Add(comment);
                 return ctx.SaveChanges() == 1;
             }
@@ -89,6 +92,7 @@ namespace ChoreTracker.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var comment = ctx.Comments.FirstOrDefault(c => c.CommentId == rao.CommentId);
+                if (comment == null) return false;
                 var children = ctx.Comments.Where(c => c.ParentId == rao.CommentId).ToList();
 
                 var deletThis = new HashSet<CommentEntity> { comment };

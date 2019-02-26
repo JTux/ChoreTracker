@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
-@model ChoreTracker.Web.DataContract.Group.GroupDetailDTO
+@using ChoreTracker.Web.DataContract.Group
+@model GroupDetailDTO
 
 @{
     ViewBag.Title = @Html.DisplayFor(model => model.GroupName);
@@ -36,7 +37,7 @@
         <td>
             @Html.DisplayFor(model => model.GroupInviteKey)
 
-            @if (ViewBag.IsMod)
+            @if (Model.IsMod)
             {
                 @Html.ActionLink("Regenerate Invite Key", "EditInviteKey", new { groupId = Model.GroupId })
             }
@@ -46,7 +47,7 @@
         </td>
     </tr>
 </table>
-@if (ViewBag.GroupMembers != null && ViewBag.GroupMembers.Count != 0)
+@if (Model.GroupMembers != null && Model.GroupMembers.Count() != 0)
 {
     <table class="table">
         <tr></tr>
@@ -56,23 +57,27 @@
             <th>Is Mod</th>
             <th></th>
         </tr>
-        @foreach (var gm in ViewBag.GroupMembers)
+        @foreach (var gm in Model.GroupMembers)
         {
             <tr>
                 <td>@gm.UserName</td>
                 <td>@gm.RewardPoints</td>
                 <td>@gm.IsMod</td>
                 <td>
-                    @if (!gm.IsOwner && ViewBag.IsMod)
+                    @if (!gm.IsOwner && Model.IsMod)
                     {
                         @Html.ActionLink("Kick", "KickMember", "Group", new { memberId = gm.MemberId, groupId = Model.GroupId }, null)
+                    }
+                    @if (Model.GroupOwnerId == Guid.Parse(User.Identity.GetUserId()) && !gm.IsOwner && !gm.IsMod)
+                    {
+                        @Html.ActionLink("Promote", "GrantMod", new GroupPromoteDTO { GroupId = Model.GroupId, GroupMemberId = gm.MemberId }, null)
                     }
                 </td>
             </tr>
         }
     </table>
 }
-@if (ViewBag.GroupApplicants != null && ViewBag.GroupApplicants.Count != 0)
+@if (Model.GroupApplicants != null && Model.GroupApplicants.Count() != 0)
 {
     <table class="table">
         <tr></tr>
@@ -81,20 +86,20 @@
             <th>Earned Points</th>
             <th></th>
         </tr>
-        @foreach (var gm in ViewBag.GroupApplicants)
+        @foreach (var gm in Model.GroupApplicants)
         {
             <tr>
                 <td>@gm.UserName</td>
                 <td>@gm.RewardPoints</td>
                 <td>
-                    @Html.ActionLink("Accept", "Acceptance", "Group", new { id = gm.MemberId, groupId = Model.GroupId, accepted = true }, null) |
-                    @Html.ActionLink("Deny", "Acceptance", "Group", new { id = gm.MemberId, groupId = Model.GroupId, accepted = false }, null)
+                    @Html.ActionLink("Accept", "Acceptance", "Group", new GroupAcceptanceDTO { Accepted = true, GroupId = Model.GroupId, GroupMemberId = gm.MemberId }, null) |
+                    @Html.ActionLink("Deny", "Acceptance", "Group", new GroupAcceptanceDTO { Accepted = true, GroupId = Model.GroupId, GroupMemberId = gm.MemberId }, null)
                 </td>
             </tr>
         }
     </table>
 }
-@if (ViewBag.Comments != null && ViewBag.Comments.Count != 0)
+@if (Model.Comments != null && Model.Comments.Count() != 0)
 {
     <table class="comment-table">
         <tr>
@@ -102,7 +107,7 @@
                 Comments
             </th>
         </tr>
-        @foreach (var c in ViewBag.Comments)
+        @foreach (var c in Model.Comments)
         {
             var parentContent = c.Content;
             var comment = new ChoreTracker.Web.DataContract.Comment.CommentListItemDTO
@@ -114,7 +119,6 @@
                 OwnerId = c.OwnerId,
                 GroupId = c.GroupId
             };
-
 
             <tr class="comment-row">
                 <td class="comment-cell">

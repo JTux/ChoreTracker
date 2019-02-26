@@ -28,11 +28,6 @@ namespace ChoreTracker.WebMVC.Controllers
             var commentSvc = GetCommentService();
             var model = svc.GetGroupInfo(id);
 
-            ViewBag.GroupMembers = svc.GetGroupMembers(model.GroupId);
-            ViewBag.GroupApplicants = svc.GetApplicants(model.GroupId);
-            ViewBag.IsMod = svc.IsMod(model.GroupId);
-            ViewBag.Comments = commentSvc.GetGroupComments(model.GroupId);
-
             return View(model);
         }
 
@@ -131,23 +126,36 @@ namespace ChoreTracker.WebMVC.Controllers
             return RedirectToAction("Index", new { id = groupId });
         }
 
-        public ActionResult Acceptance(int id, int groupId, bool accepted)
+        public ActionResult Acceptance(GroupAcceptanceDTO dto)
         {
             var svc = GetGroupService();
             var rao = new GroupAcceptanceRAO
             {
-                GroupMemberId = id,
-                GroupId = groupId,
-                Accepted = accepted
+                GroupMemberId = dto.GroupMemberId,
+                GroupId = dto.GroupId,
+                Accepted = dto.Accepted
             };
 
             if (svc.Acceptance(rao))
-            {
-                return RedirectToAction("Index", new { id = groupId });
-            }
+                return RedirectToAction("Index", new { id = dto.GroupId });
 
             TempData["FailResult"] = "Cannot accept applicant.";
-            return RedirectToAction("Index", new { id = groupId });
+            return RedirectToAction("Index", new { id = dto.GroupId });
+        }
+
+        public ActionResult GrantMod(GroupPromoteDTO dto)
+        {
+            var svc = GetGroupService();
+            var rao = new GroupPromoteRAO
+            {
+                GroupId = dto.GroupId,
+                GroupMemberId = dto.GroupMemberId
+            };
+            if(svc.PromoteMember(rao))
+                return RedirectToAction("Index", new { id = dto.GroupId });
+
+            TempData["FailResult"] = "Cannot promote member.";
+            return RedirectToAction("Index", new { id = dto.GroupId });
         }
 
         private GroupService GetGroupService() => new GroupService(Guid.Parse(User.Identity.GetUserId()));
